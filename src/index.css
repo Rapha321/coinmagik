@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.details {
+  display: flex;
+
+}
+
+.charts {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .chart-display {
+  display: flex;
+  flex-direction: row;
+} */
+
+.select-cur {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.chart-div {
+  display: none;
+}
+
+.header--second {
+  display: flex;
+}
+
+.header-price {
+  width: 60%;
+  margin-left: 10px;
+  justify-content: flex-end;
+}

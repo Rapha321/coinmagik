@@ -1,0 +1,17 @@
+import React from "react";
+
+export default function TableHeader() {
+    return (
+        <div>
+            <br/><br/>
+            <table>
+                <tr>
+                    <th width="50px"></th>
+                    <th width="200px"> Produit</th>
+                    <th width="200px">Prix</th>
+                    <th width="200px">Changement Prix</th>
+                </tr>
+            </table>
+        </div>
+    )
+}

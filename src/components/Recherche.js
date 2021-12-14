@@ -1,7 +1,6 @@
 
 import React from "react";
 import TableHeader from "./TableHeader";
-import { Table, TableBody } from "semantic-ui-react";
 import Chart from './Chart';
 import Specs from './Specs';
 
@@ -37,7 +36,8 @@ const Recherche = (props) => {
             { Object.keys(data).map((x) => <Specs id={data[x].id} 
                                             img={data[x].image} 
                                             prix={data[x].current_price} 
-                                            prixChange={data[x].price_change_24h}/> ) }
+                                            prixChange={data[x].price_change_24h}
+                                            search={props.search} /> ) }
                 
             </tbody>
 

@@ -5,11 +5,19 @@ import TableHeader from './TableHeader';
 
 export default function Specs(props) {
 
+    const afficher = () => {
+        if (props.search == "" || props.id.includes(props.search)) {
+            return "block";
+        } else {
+            return "none";
+        }
+    }
+
     return (
 
         <div>
             
-            <tr>
+            <tr style={{display: afficher()}}>
                 <td width="50px" > <img src={props.img} width="25px"/> </td>
                 <td width="200px" > {props.id} </td>
                 <td width="200px" > {props.prix} </td>

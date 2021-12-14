@@ -22,24 +22,32 @@ export default function Header() {
         setCurrency(prev => data.value);
     }
 
+    const searchDisplay = (e, data) => {
+        setSearch(prev => e.target.value)
+    }
+
 
     return (
         <div>
             <div class="ui block header">
-                <h1>ꓘoinManiaK</h1>
+                <h1>ꓘoinMagiK</h1>
             </div>
 
             <div className="header--second">
-                <Select className="select-cur" options={currencies} value={currency} onChange={onCurrencyChange} placeholder="Currency"/>
+                <Select className="select-cur" 
+                        options={currencies} 
+                        value={currency} 
+                        onChange={onCurrencyChange} 
+                        placeholder="Currency"/>
                 <div class="ui icon input" >
-                    <input type="text" placeholder="Search..." /><i aria-hidden="true" class="search circular link icon"></i>
+                    <input type="text" placeholder="Search..." name="search" value={search} onChange={searchDisplay}/>
                 </div>
                 <div className="header-price">
                     <Message color='black' ></Message>
                 </div>
             </div>
-            <Recherche cur={currency}/>
-            
+
+            <Recherche cur={currency} search={search}/>
         </div>
         
     )

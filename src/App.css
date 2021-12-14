@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+
+.ui striped {
+  margin-bottom: 0;
+  margin-top: 0;
+}

@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Message, Select } from "semantic-ui-react";
+import Recherche from './Recherche';
+import TableHeader from './TableHeader';
 
 export default function Header() {
+
+    const [currency, setCurrency] = useState("USD");
+    const [search, setSearch] = useState("");
 
     const currencies = [
         { key: 'usd', value: 'usd', text: 'USD' },
@@ -13,22 +18,28 @@ export default function Header() {
       ]
 
 
+    const onCurrencyChange = (e, data) => {
+        setCurrency(prev => data.value);
+    }
+
+
     return (
         <div>
             <div class="ui block header">
-                hello from header.js
+                <h1>ꓘoinManiaK</h1>
             </div>
 
             <div className="header--second">
-                <Select className="select-cur" options={currencies} placeholder="Afficher le prix en"/>
+                <Select className="select-cur" options={currencies} value={currency} onChange={onCurrencyChange} placeholder="Currency"/>
                 <div class="ui icon input" >
-                    <input type="text" placeholder="Search..."/><i aria-hidden="true" class="search circular link icon"></i>
+                    <input type="text" placeholder="Search..." /><i aria-hidden="true" class="search circular link icon"></i>
                 </div>
                 <div className="header-price">
                     <Message color='black' ></Message>
                 </div>
             </div>
-
+            <Recherche cur={currency}/>
+            
         </div>
         
     )

@@ -39,9 +39,3 @@ code {
 .header--second {
   display: flex;
 }
-
-.header-price {
-  width: 60%;
-  margin-left: 10px;
-  justify-content: flex-end;
-}

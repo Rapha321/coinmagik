@@ -8,6 +8,7 @@ const Recherche = (props) => {
 
     const [data, setData] = React.useState({
         id: "",
+        symbol: "",
         img: "",
         prix: 0,
         prixChange: 0
@@ -25,6 +26,7 @@ const Recherche = (props) => {
        <div className="details">
         <div >
         <table class="table table-striped">
+
             <thead>
                 <tr>
                     <TableHeader />
@@ -32,13 +34,11 @@ const Recherche = (props) => {
             </thead>
 
             <tbody>
-                
-            { Object.keys(data).map((x) => <Specs id={data[x].id} 
-                                            img={data[x].image} 
-                                            prix={data[x].current_price} 
-                                            prixChange={data[x].price_change_24h}
-                                            search={props.search} /> ) }
-                
+                { Object.keys(data).map((x) => <Specs id={data[x].id} 
+                                                img={data[x].image} 
+                                                prix={data[x].current_price} 
+                                                prixChange={data[x].price_change_24h}
+                                                search={props.search} /> ) }
             </tbody>
 
         </table>

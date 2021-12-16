@@ -74,7 +74,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-export default function Chart() {
+export default function ChartTopTen() {
   return (
       <div className="chart-display">
         <AreaChart

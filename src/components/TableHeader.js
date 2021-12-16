@@ -1,5 +1,4 @@
 import React from "react";
-import { Table, TableBody } from "semantic-ui-react";
 
 export default function TableHeader(props) {
 

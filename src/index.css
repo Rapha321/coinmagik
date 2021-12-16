@@ -17,25 +17,22 @@ code {
 
 }
 
-.charts {
+/* .charts {
   display: flex;
   flex-direction: column;
-}
-
-/* .chart-display {
-  display: flex;
-  flex-direction: row;
 } */
+
 
 .select-cur {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-.chart-div {
+/* #chart-div {
   display: none;
-}
+} */
 
 .header--second {
   display: flex;
 }
+

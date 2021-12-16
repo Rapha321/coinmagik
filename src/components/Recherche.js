@@ -1,18 +1,12 @@
 
 import React from "react";
 import TableHeader from "./TableHeader";
-import Chart from './Chart';
+import ChartTopTen from './ChartTopTen';
 import Specs from './Specs';
 
 const Recherche = (props) => {
 
-    const [data, setData] = React.useState({
-        id: "",
-        symbol: "",
-        img: "",
-        prix: 0,
-        prixChange: 0
-    });
+    const [data, setData] = React.useState({});
 
 
     React.useEffect(() => {
@@ -25,7 +19,7 @@ const Recherche = (props) => {
     return (
        <div className="details">
         <div >
-        <table class="table table-striped">
+        <table className="table table-striped">
 
             <thead>
                 <tr>
@@ -34,11 +28,14 @@ const Recherche = (props) => {
             </thead>
 
             <tbody>
-                { Object.keys(data).map((x) => <Specs id={data[x].id} 
-                                                img={data[x].image} 
-                                                prix={data[x].current_price} 
-                                                prixChange={data[x].price_change_24h}
-                                                search={props.search} /> ) }
+                { Object.keys(data).map((x) => <Specs 
+                                                      id={data[x].id} 
+                                                      symbol={data[x].symbol}
+                                                      img={data[x].image} 
+                                                      prix={data[x].current_price} 
+                                                      prixChange={data[x].price_change_24h}
+                                                      search={props.search} 
+                                                      cur={props.cur}/> ) }
             </tbody>
 
         </table>
@@ -46,7 +43,7 @@ const Recherche = (props) => {
         </div>
         <div className="charts">
           <br/><br/><br/><br/>
-          <Chart />
+          <ChartTopTen />
         </div>
       </div>
     )

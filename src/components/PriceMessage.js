@@ -1,12 +1,9 @@
 import React from "react";
-import { Message } from "semantic-ui-react";
 
 
 export default function PriceMessage(props) {
 
-    const [data, setData] = React.useState({
-
-    });
+    const [data, setData] = React.useState({});
 
 
     React.useEffect(() => {
@@ -15,11 +12,12 @@ export default function PriceMessage(props) {
         .then(info => setData(prev => info) )
     }, [props.cur])
 
+    
     return (
         <div className="flow-price-wrapper">
             <div  id="flow-price" class="alert alert-dark" role="alert"> 
                 { 
-                    Object.keys(data).map(x => <span>
+                    Object.keys(data).map(x => <span key={data[x].symbol}>
                                                     <strong>  {data[x].symbol.toUpperCase()} </strong> : 
                                                     <strong>  Prix  </strong> {data[x].current_price} 
                                                     <strong>  High  </strong> {data[x].high_24h} 

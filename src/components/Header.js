@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Message, Select } from "semantic-ui-react";
+import { Select } from "semantic-ui-react";
 import Recherche from './Recherche';
-import TableHeader from './TableHeader';
 import PriceMessage from './PriceMessage';
 
 export default function Header() {
@@ -44,6 +43,7 @@ export default function Header() {
                         value={currency} 
                         onChange={onCurrencyChange} 
                         placeholder="Currency"/>
+
                 <div class="ui icon input" >
                     <input type="text" placeholder="Search..." name="search" value={search} onChange={searchDisplay}/>
                 </div>

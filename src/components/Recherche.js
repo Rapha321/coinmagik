@@ -19,31 +19,26 @@ const Recherche = (props) => {
     return (
        <div className="details">
         <div >
-        <table className="table table-striped">
+            <table className="table table-striped">
 
-            <thead>
-                <tr>
-                    <TableHeader />
-                </tr>
-            </thead>
+                <thead>
+                    <tr>
+                        <TableHeader />
+                    </tr>
+                </thead>
 
-            <tbody>
-                { Object.keys(data).map((x) => <Specs 
-                                                      id={data[x].id} 
-                                                      symbol={data[x].symbol}
-                                                      img={data[x].image} 
-                                                      prix={data[x].current_price} 
-                                                      prixChange={data[x].price_change_24h}
-                                                      search={props.search} 
-                                                      cur={props.cur}/> ) }
-            </tbody>
+                <tbody>
+                    { Object.keys(data).map((x) => <Specs 
+                                                        id={data[x].id} 
+                                                        symbol={data[x].symbol}
+                                                        img={data[x].image} 
+                                                        prix={data[x].current_price} 
+                                                        prixChange={data[x].price_change_percentage_24h}
+                                                        search={props.search} 
+                                                        cur={props.cur}/> ) }
+                </tbody>
 
-        </table>
-
-        </div>
-        <div className="charts">
-          <br/><br/><br/><br/>
-          <ChartTopTen />
+            </table>
         </div>
       </div>
     )

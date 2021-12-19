@@ -1,4 +1,5 @@
 import React from "react";
+import { Message } from "semantic-ui-react";
 
 
 export default function PriceMessage(props) {
@@ -15,17 +16,17 @@ export default function PriceMessage(props) {
     
     return (
         <div className="flow-price-wrapper">
-            <div  id="flow-price" class="alert alert-dark" role="alert"> 
+            <Message color="black" id="flow-price" > 
                 { 
-                    Object.keys(data).map(x => <span key={data[x].symbol}>
-                                                    <strong>  {data[x].symbol.toUpperCase()} </strong> : 
+                    Object.keys(data).map(x => <span key={data[x].symbol} style={{color:"#00ff00"}}>
+                                                    <strong style={{color:"#FFFFFF"}}>  {data[x].symbol.toUpperCase()} </strong> : 
                                                     <strong>  Prix  </strong> {data[x].current_price} 
                                                     <strong>  High  </strong> {data[x].high_24h} 
                                                     <strong>  Low  </strong> {data[x].low_24h} -----
                                                 </span>
                                         )
                 }
-            </div>
+            </Message>
         </div>
 
     )

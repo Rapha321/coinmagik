@@ -17,20 +17,11 @@ code {
 
 }
 
-/* .charts {
-  display: flex;
-  flex-direction: column;
-} */
-
 
 .select-cur {
   margin-right: 10px;
   margin-left: 10px;
 }
-
-/* #chart-div {
-  display: none;
-} */
 
 .header--second {
   display: flex;

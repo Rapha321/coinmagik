@@ -62,8 +62,9 @@
 }
 
 
-/* .chartIndividual {
+.browserRouter {
   display: flex;
-  flex-direction: row;
-  background-color: blue;
-} */
+}
+.menu {
+  width: 40%;
+}

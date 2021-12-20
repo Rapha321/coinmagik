@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Select, Message, Menu } from "semantic-ui-react";
-// import { NavLink } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import Recherche from './Recherche';
 import PriceMessage from './PriceMessage';
+import ChartTopTen from './ChartTopTen';
+import Portfolio from './Portfolio';
 
 export default function Header() {
 
@@ -36,33 +38,48 @@ export default function Header() {
 
     return (
         <div>
-            <Message color="teal" class="ui block header">
-                <h1>ꓘoinMagiK</h1>
-                {/* <Menu>
-                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} >Dashboard</Menu.Item>
-                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}}  >Top 10 </Menu.Item>
-                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}}  >Mon Portfolio</Menu.Item>
-                </Menu> */}
-            </Message>
+            <BrowserRouter >
+                <Message color="teal" class="ui block header">
+               
+                    <div className="browserRouter">
+                        <h1>ꓘoinMagiK</h1>
 
-            <div className="header-price">
-                    <PriceMessage cur={currency}/>
-            </div>
-            <br/>
-            <div className="header--second">
-                <Select className="select-cur" 
-                        options={currencies} 
-                        value={currency} 
-                        onChange={onCurrencyChange} 
-                        placeholder="Currency"/>
+                        <div>
+                            <header>
+                                <Menu className='menu'>
+                                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/Recherche" exact={true}>Dashboard   </Menu.Item>
+                                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/ChartTopTen">Top 10    </Menu.Item>
+                                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/Portfolio">Mon Portfolio     </Menu.Item>
+                                </Menu>
+                            </header>
 
-                <div class="ui icon input" >
-                    <input type="text" placeholder="Search..." ref={searchRef} name="search" value={search} onChange={searchDisplay}/>
+                        </div>
+                    
+                        <div className="header--second">
+                            <Select className="select-cur" 
+                                options={currencies} 
+                                value={currency} 
+                                onChange={onCurrencyChange} 
+                                placeholder="Currency"/>
+
+                            <div class="ui icon input" >
+                                <input type="text" placeholder="Search..." ref={searchRef} name="search" value={search} onChange={searchDisplay}/>
+                            </div>
+                        </div>
+                    </div>
+               
+                </Message>
+
+                <div className="header-price">
+                        <PriceMessage cur={currency}/>
                 </div>
+                <Switch>
+                    <Route path="/Recherche" exact={true}> <Recherche cur={currency} search={search}/> </Route>
+                    <Route path="/ChartTopTen" exact={true}> <ChartTopTen /> </Route> 
+                    <Route path="/Portfolio"> <Portfolio /> </Route>
+                </Switch>
+            </BrowserRouter>
 
-            </div>
-
-            <Recherche cur={currency} search={search}/>
         </div>
         
     )

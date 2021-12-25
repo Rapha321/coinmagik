@@ -75,7 +75,7 @@ export default function Header() {
                 </div>
                 <Switch>
                     <Route path="/Recherche" exact={true}> <Recherche cur={currency} search={search}/> </Route>
-                    <Route path="/ChartTopTen" exact={true}> <ChartTopTen cur={currency} search={search}/> </Route> 
+                    <Route path="/ChartTopTen"> <ChartTopTen cur={currency} search={search}/> </Route> 
                     <Route path="/Portfolio"> <Portfolio /> </Route>
                 </Switch>
             </BrowserRouter>

@@ -21,15 +21,14 @@ export default function ChartIndividual(props) {
 
     return () => {isMounted = false};
 
-  }, [props.symbol])
+  }, [props.cur])
 
 
   const data1 = [];
 
-  for (let i = 0; i < priceData.length; i++) {
-    data1.push({nameX: "      Prix: 7 jours historique", prix: priceData[i]})
+  for (let data of priceData) {
+    data1.push({nameX: "      Prix: 7 jours historique", prix: data})
   }
-  
 
   return (
       <div style = {{display: "flex", flexDirection: "row"}}>

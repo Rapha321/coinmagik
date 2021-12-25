@@ -64,7 +64,15 @@
 
 .browserRouter {
   display: flex;
+  justify-content: space-around;
 }
-.menu {
-  width: 40%;
+
+.infoAditionnel {
+  display: flex;
+}
+
+.topTen-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

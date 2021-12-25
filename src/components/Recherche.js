@@ -34,6 +34,10 @@ const Recherche = (props) => {
                                                         img={data[x].image} 
                                                         prix={data[x].current_price} 
                                                         prixChange={data[x].price_change_percentage_24h}
+                                                        volTotal={data[x].total_volume}
+                                                        rangCap={data[x].market_cap_rank}
+                                                        totalSupply={data[x].total_supply}
+                                                        maxSupply={data[x].max_supply}
                                                         search={props.search} 
                                                         cur={props.cur}/> ) }
                 </tbody>

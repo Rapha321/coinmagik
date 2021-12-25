@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Select, Message, Menu } from "semantic-ui-react";
+import { Select, Message, Menu, Container } from "semantic-ui-react";
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import Recherche from './Recherche';
 import PriceMessage from './PriceMessage';
@@ -37,7 +37,7 @@ export default function Header() {
 
 
     return (
-        <div>
+        <Container>
             <BrowserRouter >
                 <Message color="teal" class="ui block header">
                
@@ -75,12 +75,12 @@ export default function Header() {
                 </div>
                 <Switch>
                     <Route path="/Recherche" exact={true}> <Recherche cur={currency} search={search}/> </Route>
-                    <Route path="/ChartTopTen" exact={true}> <ChartTopTen /> </Route> 
+                    <Route path="/ChartTopTen" exact={true}> <ChartTopTen cur={currency} search={search}/> </Route> 
                     <Route path="/Portfolio"> <Portfolio /> </Route>
                 </Switch>
             </BrowserRouter>
 
-        </div>
+        </Container>
         
     )
 }

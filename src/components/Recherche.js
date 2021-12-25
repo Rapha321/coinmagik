@@ -37,6 +37,7 @@ const Recherche = (props) => {
                                                         volTotal={data[x].total_volume}
                                                         rangCap={data[x].market_cap_rank}
                                                         totalSupply={data[x].total_supply}
+                                                        circulatingSupply={data[x].circulating_supply}
                                                         maxSupply={data[x].max_supply}
                                                         search={props.search} 
                                                         cur={props.cur}/> ) }

@@ -23,6 +23,22 @@ export default function Specs(props) {
         }
     }
 
+    const addCommas = (nStr) => {
+        nStr += '';
+        var x = nStr.split('.');
+        var x1 = x[0];
+        var x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
+
+    let styles = {
+        paddingRight: '60px'
+    }
+
 
     return (
         
@@ -30,9 +46,9 @@ export default function Specs(props) {
             <tr style={{display: afficher()}} key={props.symbol} onClick={handleClick}>
                 <td width="70px" > <img alt="logo" src={props.img} width="25px"/> </td>
                 <td width="200px" > {props.id} </td>
-                <td width="200px" > {props.prix} </td>
-                <td width="200px" > {props.prixChange} </td>
-                <td width="200px"> {props.volTotal} </td>
+                <td width="200px" align="right" style={styles}> {addCommas(props.prix.toFixed(4))} </td>
+                <td width="200px" align="right" style={styles}> {props.prixChange.toFixed(5)} </td>
+                <td width="200px" align="right" style={styles}> {addCommas(props.volTotal)} </td>
                 <td width="150px"> <button class="ui mini teal button" >Ajouter</button> </td>
             </tr>
             <tr style={{display: display}} id="chart-div"> 
@@ -50,8 +66,8 @@ export default function Specs(props) {
                         <br/>
                         <span>Symbol: {props.symbol} </span><br/>
                         <span>Rang de capitalisation: {props.rangCap}</span><br/>
-                        <span>Approvisionnement total: {props.totalSupply}</span><br/>
-                        <span>Approvisionnement maximum: {props.maxSupply}</span>
+                        <span>Approvisionnement total: {addCommas(props.totalSupply)}</span><br/>
+                        <span>Approvisionnement maximum: {addCommas(props.maxSupply)}</span>
                     </div>
                 </div>
                 <br/>

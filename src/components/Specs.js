@@ -57,7 +57,7 @@ export default function Specs(props) {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td > <ChartIndividual symbol={props.symbol} cur={props.cur}/> </td> 
+                        <td > <ChartIndividual symbol={props.symbol} cur={props.cur} data={props.data}/> </td> 
                         <td></td>
                         <td></td>
                     </div>

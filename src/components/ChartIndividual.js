@@ -11,13 +11,11 @@ export default function ChartIndividual(props) {
 
   React.useEffect(() => {
     let isMounted = true;
-    fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${props.cur}&order=market_cap_desc&per_page=100&page=1&sparkline=true`)
-    .then(res => res.json())
-    .then(info => info.map(x => { 
-                                    if (isMounted && x.symbol === props.symbol) {
-                                      setPriceData(prev => x.sparkline_in_7d.price)                        
-                                    } 
-                  }))
+    props.data.map(x => { 
+                          if (isMounted && x.symbol === props.symbol) {
+                            setPriceData(prev => x.sparkline_in_7d.price)                        
+                          } 
+                  })
 
     return () => {isMounted = false};
 

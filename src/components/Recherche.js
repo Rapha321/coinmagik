@@ -6,16 +6,6 @@ import Specs from './Specs';
 
 const Recherche = (props) => {
 
-    const [data, setData] = React.useState({});
-
-
-    React.useEffect(() => {
-        fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${props.cur}&order=market_cap_desc&per_page=100&page=1&sparkline=true`)
-        .then(res => res.json())
-        .then(info => setData(prev => info))
-    }, [props.cur])
-
-
     return (
        <div className="details">
         <div >
@@ -28,19 +18,20 @@ const Recherche = (props) => {
                 </thead>
 
                 <tbody>
-                    { Object.keys(data).map((x) => <Specs 
-                                                        id={data[x].id} 
-                                                        symbol={data[x].symbol}
-                                                        img={data[x].image} 
-                                                        prix={data[x].current_price} 
-                                                        prixChange={data[x].price_change_percentage_24h}
-                                                        volTotal={data[x].total_volume}
-                                                        rangCap={data[x].market_cap_rank}
-                                                        totalSupply={data[x].total_supply}
-                                                        circulatingSupply={data[x].circulating_supply}
-                                                        maxSupply={data[x].max_supply}
+                    { Object.keys(props.data).map((x) => <Specs 
+                                                        id={props.data[x].id} 
+                                                        symbol={props.data[x].symbol}
+                                                        img={props.data[x].image} 
+                                                        prix={props.data[x].current_price} 
+                                                        prixChange={props.data[x].price_change_percentage_24h}
+                                                        volTotal={props.data[x].total_volume}
+                                                        rangCap={props.data[x].market_cap_rank}
+                                                        totalSupply={props.data[x].total_supply}
+                                                        circulatingSupply={props.data[x].circulating_supply}
+                                                        maxSupply={props.data[x].max_supply}
                                                         search={props.search} 
-                                                        cur={props.cur}/> ) }
+                                                        cur={props.cur}
+                                                        data={props.data} /> ) }
                 </tbody>
 
             </table>

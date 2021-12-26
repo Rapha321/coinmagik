@@ -12,6 +12,15 @@ export default function Header() {
     const [search, setSearch] = useState("");
     const searchRef = useRef();
 
+    const [data, setData] = React.useState({});
+
+
+    React.useEffect(() => {
+        fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=true`)
+        .then(res => res.json())
+        .then(info => setData(prev => info))
+    }, [currency])
+
 
     const currencies = [
         { key: 'usd', value: 'usd', text: 'USD' },
@@ -23,11 +32,11 @@ export default function Header() {
       ]
 
 
-    const onCurrencyChange = (e, data) => {
-        setCurrency(prev => data.value)
+    const onCurrencyChange = (e, data1) => {
+        setCurrency(prev => data1.value)
     }
 
-    const searchDisplay = (e, data) => {
+    const searchDisplay = (e) => {
         setSearch(prev => e.target.value)
     }
 
@@ -74,8 +83,8 @@ export default function Header() {
                         <PriceMessage cur={currency}/>
                 </div>
                 <Switch>
-                    <Route path="/Recherche" exact={true}> <Recherche cur={currency} search={search}/> </Route>
-                    <Route path="/ChartTopTen"> <ChartTopTen cur={currency} search={search}/> </Route> 
+                    <Route path="/Recherche" exact={true}> <Recherche cur={currency} data={data} search={search}/> </Route>
+                    <Route path="/ChartTopTen"> <ChartTopTen cur={currency} data={data} search={search}/> </Route> 
                     <Route path="/Portfolio"> <Portfolio /> </Route>
                 </Switch>
             </BrowserRouter>

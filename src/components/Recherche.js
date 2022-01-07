@@ -2,7 +2,7 @@
 import React from "react";
 import TableHeader from "./TableHeader";
 import ChartTopTen from './ChartTopTen';
-import Specs from './Specs';
+import TableBody from './TableBody';
 
 const Recherche = (props) => {
 
@@ -18,7 +18,7 @@ const Recherche = (props) => {
                 </thead>
 
                 <tbody>
-                    { Object.keys(props.data).map((x) => <Specs 
+                    { Object.keys(props.data).map((x) => <TableBody 
                                                         id={props.data[x].id} 
                                                         symbol={props.data[x].symbol}
                                                         img={props.data[x].image} 

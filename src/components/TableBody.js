@@ -1,10 +1,13 @@
-import React, { useState } from "react"
-import { Container } from "semantic-ui-react";
+import React, { useState, useContext } from "react"
+import { Button, Container } from "semantic-ui-react"
 import ChartIndividual from "./ChartIndividual"
+import {PortfolioContext}  from "./PortfolioContext"
 
-export default function Specs(props) {
+export default function TableBody(props) {
 
-    const [display, setDisplay] = useState("none");
+    const [display, setDisplay] = useState("none")
+    const [portfolio, setPortfolio] = useContext(PortfolioContext)
+
 
     const afficher = () => {
         if (props.search === "" || props.id.includes(props.search)) {
@@ -19,7 +22,7 @@ export default function Specs(props) {
         if (display === "none") {
             setDisplay(prev => "inline-block");
         } else {
-            setDisplay(prev => "none");
+            setDisplay(prev => "none")
         }
     }
 
@@ -35,21 +38,26 @@ export default function Specs(props) {
         return x1 + x2;
     }
 
+
     let styles = {
         paddingRight: '60px'
     }
 
 
     return (
-        
-        <Container >
+        <Container>
             <tr style={{display: afficher()}} key={props.symbol} onClick={handleClick}>
                 <td width="70px" > <img alt="logo" src={props.img} width="25px"/> </td>
                 <td width="200px" > {props.id} </td>
                 <td width="200px" align="right" style={styles}> {addCommas(props.prix.toFixed(4))} </td>
                 <td width="200px" align="right" style={styles}> {props.prixChange.toFixed(5)} </td>
                 <td width="200px" align="right" style={styles}> {addCommas(props.volTotal)} </td>
-                <td width="150px"> <button class="ui mini teal button" >Ajouter</button> </td>
+                <td width="150px"> 
+                    <Button class="ui mini teal button" 
+                            onClick={() => {setPortfolio( prev => [...prev, props.symbol] ); setDisplay("none")}}>
+                            Ajouter
+                    </Button>
+                </td>
             </tr>
             <tr style={{display: display}} id="chart-div"> 
                 <div className="infoAditionnel">
@@ -72,7 +80,6 @@ export default function Specs(props) {
                 </div>
                 <br/>
             </tr>
-
         </Container>
     ) 
 

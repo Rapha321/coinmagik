@@ -1,17 +1,18 @@
-import React from "react";
-import './App.css';
+import React from "react"
+import './App.css'
 import 'semantic-ui-css/semantic.min.css'
-import Header from './components/Header';
-import { Container } from "semantic-ui-react";
+import Header from './components/Header'
+import { Container } from "semantic-ui-react"
+import { PortfolioProvider } from "./components/PortfolioContext"
 
 
 function App() {
 
   return (
-    <Container>
+    <PortfolioProvider>
       <Header />
-    </Container>
-  );
+    </PortfolioProvider>
+  )
 }
 
 export default App;

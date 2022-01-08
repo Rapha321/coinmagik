@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Select, Message, Menu, Container } from "semantic-ui-react";
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import Recherche from './Recherche';
+import AllCoins from './AllCoins';
 import PriceMessage from './PriceMessage';
-import ChartTopTen from './ChartTopTen';
+import TopTen from './TopTen';
 import Portfolio from './Portfolio';
 
 export default function Header() {
@@ -54,7 +54,7 @@ export default function Header() {
                             <header>
                                 <Menu className='menu'>
                                     <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/" exact={true}>Dashboard   </Menu.Item>
-                                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/ChartTopTen">Top 10    </Menu.Item>
+                                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/TopTen">Top 10    </Menu.Item>
                                     <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/Portfolio">Mon Portfolio     </Menu.Item>
                                 </Menu>
                             </header>
@@ -79,9 +79,9 @@ export default function Header() {
                     <PriceMessage cur={currency}/>
                 </div>
                 <Switch>
-                    <Route path="/" exact={true}> <Recherche cur={currency} data={data} search={search}/> </Route>
-                    <Route path="/ChartTopTen"> <ChartTopTen cur={currency} data={data} search={search}/> </Route> 
-                    <Route path="/Portfolio"> <Portfolio cur={currency} data={data} /> </Route>
+                    <Route path="/" exact={true}> <AllCoins cur={currency} data={data} search={search}/> </Route>
+                    <Route path="/TopTen"> <TopTen cur={currency} data={data} search={search}/> </Route> 
+                    <Route path="/Portfolio"> <Portfolio cur={currency} data={data}/> </Route>
                 </Switch>
             </BrowserRouter>
 

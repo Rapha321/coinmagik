@@ -11,7 +11,7 @@ import {
 import { Button, Card, Container, Image } from "semantic-ui-react";
 import TopTenResult from "./TopTenResult";
 
-export default function ChartTopTen(props) {
+export default function TopTen(props) {
 
 let topTen = [ 
               { rank1: 1, n1:"", url1:"", p1:0 }, 

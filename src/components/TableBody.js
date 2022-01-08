@@ -1,13 +1,24 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Button, Container } from "semantic-ui-react"
 import ChartIndividual from "./ChartIndividual"
 import {PortfolioContext}  from "./PortfolioContext"
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function TableBody(props) {
 
     const [display, setDisplay] = useState("none")
+    const [buttonStatus, setButtonStatus] = useState("Ajouter")
     const [portfolio, setPortfolio] = useContext(PortfolioContext)
 
+
+
+    useEffect(() => {
+        for (let element of portfolio) {
+            if (element === props.symbol) {
+                setButtonStatus("Supprimer")
+            }
+        }
+    })
 
     const afficher = () => {
         if (props.search === "" || props.id.includes(props.search)) {
@@ -44,6 +55,15 @@ export default function TableBody(props) {
     }
 
 
+    const changeButtonStatus = () => {
+        if (buttonStatus === "Ajouter") {
+            setButtonStatus("Supprimer")
+        } else {
+            setButtonStatus("Ajouter")
+        }
+    }
+
+
     return (
         <Container>
             <tr style={{display: afficher()}} key={props.symbol} onClick={handleClick}>
@@ -53,9 +73,42 @@ export default function TableBody(props) {
                 <td width="200px" align="right" style={styles}> {props.prixChange.toFixed(5)} </td>
                 <td width="200px" align="right" style={styles}> {addCommas(props.volTotal)} </td>
                 <td width="150px"> 
-                    <Button class="ui mini teal button" 
-                            onClick={() => {setPortfolio( prev => [...prev, props.symbol] ); setDisplay("none")}}>
-                            Ajouter
+                    <Button className={buttonStatus === "Ajouter" ? "ui mini teal button" : "ui mini orange button"} 
+                            onClick={() => {
+                                if (buttonStatus === "Supprimer") {
+                                    let index = portfolio.indexOf(props.symbol)
+                                    portfolio.splice(index, 1)
+                                    setDisplay("none")
+                                    changeButtonStatus()
+                                    toast.success('👍 Supprimer avec succes!', {
+                                        toastId: 'info2',
+                                        position: "top-right",
+                                        autoClose: 2000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        });
+                                }
+                                
+                                if (buttonStatus === "Ajouter") {
+                                    changeButtonStatus()
+                                    setPortfolio(prev => [...prev, props.symbol])
+                                    setDisplay("none")
+                                    
+                                    toast.success('👍 Ajouter avec succes!', {
+                                        toastId: 'info2',
+                                        position: "top-right",
+                                        autoClose: 2000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        });
+                                }}}>
+                            {buttonStatus}
                     </Button>
                 </td>
             </tr>

@@ -1,10 +1,9 @@
 
 import React from "react";
 import TableHeader from "./TableHeader";
-import ChartTopTen from './ChartTopTen';
 import TableBody from './TableBody';
 
-const Recherche = (props) => {
+const AllCoins = (props) => {
 
     return (
        <div className="details">
@@ -41,4 +40,4 @@ const Recherche = (props) => {
 }
 
 
-export default Recherche;
+export default AllCoins;

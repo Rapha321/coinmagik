@@ -5,6 +5,7 @@ import AllCoins from './AllCoins';
 import PriceMessage from './PriceMessage';
 import TopTen from './TopTen';
 import Portfolio from './Portfolio';
+import Home from './Home';
 
 export default function Header() {
 
@@ -53,7 +54,7 @@ export default function Header() {
                         <div>
                             <header>
                                 <Menu className='menu'>
-                                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/" exact={true}>Dashboard   </Menu.Item>
+                                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/header/" exact={true}>Dashboard   </Menu.Item>
                                     <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/TopTen">Top 10    </Menu.Item>
                                     <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/Portfolio">Mon Portfolio     </Menu.Item>
                                 </Menu>
@@ -79,7 +80,7 @@ export default function Header() {
                     <PriceMessage cur={currency}/>
                 </div>
                 <Switch>
-                    <Route path="/" exact={true}> <AllCoins cur={currency} data={data} search={search}/> </Route>
+                    <Route path="/header/" exact={true}> <AllCoins cur={currency} data={data} search={search}/> </Route>
                     <Route path="/TopTen"> <TopTen cur={currency} data={data} search={search}/> </Route> 
                     <Route path="/Portfolio"> <Portfolio cur={currency} data={data}/> </Route>
                 </Switch>

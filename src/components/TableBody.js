@@ -73,7 +73,8 @@ export default function TableBody(props) {
                 <td width="200px" align="right" style={styles}> {props.prixChange.toFixed(5)} </td>
                 <td width="200px" align="right" style={styles}> {addCommas(props.volTotal)} </td>
                 <td width="150px"> 
-                    <Button className={buttonStatus === "Ajouter" ? "ui mini teal button" : "ui mini orange button"} 
+                    <Button className={buttonStatus === "Ajouter" ? "ui mini teal button" : "ui mini orange button"}
+                            style={{width:"90px", maxWidth: "90px"}} 
                             onClick={() => {
                                 if (buttonStatus === "Supprimer") {
                                     let index = portfolio.indexOf(props.symbol)

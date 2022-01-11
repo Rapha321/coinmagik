@@ -7,15 +7,15 @@ import { ToastContainer, toast } from 'react-toastify';
 export default function TableBody(props) {
 
     const [display, setDisplay] = useState("none")
-    const [buttonStatus, setButtonStatus] = useState("Ajouter")
+    const [buttonStatus, setButtonStatus] = useState("Acheter")
     const [portfolio, setPortfolio] = useContext(PortfolioContext)
 
 
 
     useEffect(() => {
         for (let element of portfolio) {
-            if (element === props.symbol) {
-                setButtonStatus("Supprimer")
+            if (element.coin === props.symbol) {
+                setButtonStatus("Vendre")
             }
         }
     })
@@ -56,10 +56,10 @@ export default function TableBody(props) {
 
 
     const changeButtonStatus = () => {
-        if (buttonStatus === "Ajouter") {
-            setButtonStatus("Supprimer")
+        if (buttonStatus === "Acheter") {
+            setButtonStatus("Vendre")
         } else {
-            setButtonStatus("Ajouter")
+            setButtonStatus("Acheter")
         }
     }
 
@@ -73,15 +73,16 @@ export default function TableBody(props) {
                 <td width="200px" align="right" style={styles}> {props.prixChange.toFixed(5)} </td>
                 <td width="200px" align="right" style={styles}> {addCommas(props.volTotal)} </td>
                 <td width="150px"> 
-                    <Button className={buttonStatus === "Ajouter" ? "ui mini teal button" : "ui mini orange button"}
+                    <Button className={buttonStatus === "Acheter" ? "ui mini teal button" : "ui mini orange button"}
                             style={{width:"90px", maxWidth: "90px"}} 
                             onClick={() => {
-                                if (buttonStatus === "Supprimer") {
+                                if (buttonStatus === "Vendre") {
                                     let index = portfolio.indexOf(props.symbol)
+                                    console.log("INDEX: ", index)
                                     portfolio.splice(index, 1)
-                                    setDisplay("none")
                                     changeButtonStatus()
-                                    toast.success('👍 Supprimer avec succes!', {
+                                    setDisplay("none")
+                                    toast.success('👍 Vendu avec succes!', {
                                         toastId: 'info2',
                                         position: "top-right",
                                         autoClose: 2000,
@@ -93,9 +94,12 @@ export default function TableBody(props) {
                                         });
                                 }
                                 
-                                if (buttonStatus === "Ajouter") {
+                                if (buttonStatus === "Acheter") {
                                     changeButtonStatus()
-                                    setPortfolio(prev => [...prev, props.symbol])
+                                    setPortfolio(prev => [...prev, {coin: props.symbol, 
+                                                                    prixAchat: props.prix,
+                                                                    prixActuel: props.current_price
+                                                                    } ])
                                     setDisplay("none")
                                     
                                     toast.success('👍 Ajouter avec succes!', {

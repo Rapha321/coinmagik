@@ -1,16 +1,31 @@
-import React, { useContext, useState } from "react"
-import { Container } from "semantic-ui-react"
+import React, { useContext, useState, useEffect } from "react"
 import {PortfolioContext}  from "./PortfolioContext"
-import { Segment, Statistic } from 'semantic-ui-react'
+import { Container, Segment, Statistic } from 'semantic-ui-react'
 import PortfolioChart from '../components/PortfolioChart'
 
 export default function Portfolio(props) {
 
     const [portfolio, setPortfolio] = useContext(PortfolioContext)
-    // const [investissementActuel, setInvestissementActuel] = useState(0)
-    // const [gainPerte, setGainPerte] = useState(0)
+    const [actuel, setActuel] = useState(0);
+    const [initial, setInitial] = useState(0);
 
-    
+    let actualInvest = 0;
+
+    portfolio.map(pfolio => {
+        props.data.map(data => {
+            if (pfolio.coin === data.symbol) {
+                actualInvest += (100000 / pfolio.prixAchat) * data.current_price 
+            }
+        })
+    })
+
+
+    useEffect(() => {
+       setInitial(portfolio.length * 100000)
+       setActuel(actualInvest)
+    }, [])
+
+
     let styles = {
         paddingLeft: '60px'
     }
@@ -27,13 +42,6 @@ export default function Portfolio(props) {
         return x1 + x2;
     }
 
-    // const invest = (prixAchat, prixActuel) => {
-    //     setInvestissementActuel(investissementActuel + (100000/prixAchat * prixActuel))
-    // }
-
-    // const gainPerteCalcul  = () => {
-    //     setGainPerte(gainPerte + (investissementActuel - 100000) )
-    // }
 
     return (
         
@@ -45,58 +53,58 @@ export default function Portfolio(props) {
 
                 <div>
                     <div style={{display: "flex", marginBottom: "20px"}}>
-                        <div style={{margin: "0"}}>
+                        <div style={{marginLeft: "5%"}}>
                             <PortfolioChart />
                         </div>
-                        <div style={{marginLeft: "auto", marginTop: "auto", marginBottom: "auto", marginRight: "15px"}}>
+                        <div style={{marginLeft: "auto", marginTop: "auto", marginBottom: "auto", marginRight: "5%"}}>
                             <Statistic.Group  >
                                 <Statistic color="blue">
-                                    <Statistic.Value>{portfolio.length * 100000}</Statistic.Value>
+                                    <Statistic.Value>{addCommas(initial.toFixed(0))}</Statistic.Value>
                                     <Statistic.Label>initial</Statistic.Label>
                                 </Statistic>
                                 <Statistic color="green">
-                                    <Statistic.Value>32,000</Statistic.Value>
+                                    <Statistic.Value>{addCommas(actuel.toFixed(0))}</Statistic.Value>
                                     <Statistic.Label>actuel</Statistic.Label>
                                 </Statistic>
-                                <Statistic color="purple">
-                                    <Statistic.Value>22</Statistic.Value>
+                                <Statistic color="purple" size="large">
+                                    <Statistic.Value>{addCommas((actuel - initial).toFixed(0))}</Statistic.Value>
                                     <Statistic.Label>gain/(perte)</Statistic.Label>
                                 </Statistic>
                             </Statistic.Group>
                         </div>    
                     </div>
 
-                    
-
                     <div>
                         <table className="table table-striped">
                             <thead>
                                 <th width="70px"> </th>
                                 <th width="200px">  Produit</th>
+                                <th width="200px" align="right" style={styles}> Montant investi </th>
                                 <th width="200px" align="right" style={styles}> Quantité </th>
-                                <th width="200px" align="right" style={styles}> Prix d'achat </th>
-                                <th width="200px" align="right" style={styles}> Prix actuel</th>
-                                <th width="150px"> Gain / Perte </th>
+                                <th width="150px" align="right" style={styles}> Prix d'achat </th>
+                                <th width="150px" align="right" style={styles}> Prix actuel</th>
+                                <th width="200px" align="right" style={styles}> Montant actuel </th>
+                                <th width="200px" align="right" style={styles}> Gain / Perte </th>
                             </thead>
                             {
                                 portfolio.map(pfolio => {
                                     return (
                                         props.data.map(data => {
                                             if (pfolio.coin === data.symbol) {
-                                                // invest(pfolio.prixAchat, data.current_price)
-                                                // gainPerteCalcul()
                                                 return (
                                                     <tbody>
                                                         <tr key={data.symbol} >
                                                             <td width="70px" > <img alt="logo" src={data.image} width="25px"/> </td>
                                                             <td width="200px" > {data.id} </td>
-                                                            <td width="200px" align="right" style={styles}> {100000 / pfolio.prixAchat} </td>
-                                                            <td width="200px" align="right" style={styles}> {pfolio.prixAchat} </td>
-                                                            <td width="200px" align="right" style={styles}> {data.current_price} </td>
-                                                            <td width="150px">  {(100000 / pfolio.prixAchat) * (data.current_price - pfolio.prixAchat)} </td>
+                                                            <td width="200px" align="right"> {addCommas(100000)} </td>
+                                                            <td width="200px" align="right" style={styles}> {addCommas((100000 / pfolio.prixAchat).toFixed(5))} </td>
+                                                            <td width="150px" align="right" style={styles}> {addCommas(pfolio.prixAchat.toFixed(4))} </td>
+                                                            <td width="150px" align="right" style={styles}> {addCommas(data.current_price.toFixed(4))} </td>
+                                                            <td width="200px" align="right" style={styles}> {addCommas(((100000 / pfolio.prixAchat) * data.current_price).toFixed(0))} </td>
+                                                            <td width="200px" align="right" style={styles}>  {addCommas(((100000 / pfolio.prixAchat) * (data.current_price - pfolio.prixAchat)).toFixed(0))} </td>
+                                                            
                                                         </tr>
                                                     </tbody>
-                                                
                                                 )
                                             }
                                         })

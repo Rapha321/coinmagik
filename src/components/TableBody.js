@@ -8,6 +8,8 @@ export default function TableBody(props) {
 
     const [display, setDisplay] = useState("none")
     const [buttonStatus, setButtonStatus] = useState("Acheter")
+    const [hover, setHover] = useState(false)
+    
     const [portfolio, setPortfolio] = useContext(PortfolioContext)
 
 
@@ -18,7 +20,7 @@ export default function TableBody(props) {
                 setButtonStatus("Vendre")
             }
         }
-    })
+    }, [portfolio])
 
     const afficher = () => {
         if (props.search === "" || props.id.includes(props.search)) {
@@ -63,10 +65,16 @@ export default function TableBody(props) {
         }
     }
 
+    const backgroundOnHover = hover ? "#afeeee" : "#e0ffff"
+
 
     return (
         <Container>
-            <tr style={{display: afficher()}} key={props.symbol} onClick={handleClick}>
+            <tr style={{display: afficher(), backgroundColor: backgroundOnHover}} 
+                key={props.symbol} 
+                onClick={handleClick} 
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}>
                 <td width="70px" > <img alt="logo" src={props.img} width="25px"/> </td>
                 <td width="200px" > {props.id} </td>
                 <td width="200px" align="right" style={styles}> {addCommas(props.prix.toFixed(4))} </td>
@@ -77,10 +85,9 @@ export default function TableBody(props) {
                             style={{width:"90px", maxWidth: "90px"}} 
                             onClick={() => {
                                 if (buttonStatus === "Vendre") {
-                                    let index = portfolio.indexOf(props.symbol)
-                                    console.log("INDEX: ", index)
-                                    portfolio.splice(index, 1)
                                     changeButtonStatus()
+                                    let index = portfolio.findIndex( element => element.coin === props.symbol)
+                                    portfolio.splice(index, 1)
                                     setDisplay("none")
                                     toast.success('👍 Vendu avec succes!', {
                                         toastId: 'info2',
@@ -97,9 +104,9 @@ export default function TableBody(props) {
                                 if (buttonStatus === "Acheter") {
                                     changeButtonStatus()
                                     setPortfolio(prev => [...prev, {coin: props.symbol, 
-                                                                    prixAchat: props.prix,
-                                                                    prixActuel: props.current_price
-                                                                    } ])
+                                                                    prixAchat: props.prix
+                                                                    } 
+                                                         ])
                                     setDisplay("none")
                                     
                                     toast.success('👍 Ajouter avec succes!', {

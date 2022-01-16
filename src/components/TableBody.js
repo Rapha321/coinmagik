@@ -12,8 +12,6 @@ export default function TableBody(props) {
     
     const [portfolio, setPortfolio] = useContext(PortfolioContext)
 
-
-
     useEffect(() => {
         for (let element of portfolio) {
             if (element.coin === props.symbol) {
@@ -82,45 +80,47 @@ export default function TableBody(props) {
                 <td width="200px" align="right" style={styles}> {addCommas(props.volTotal)} </td>
                 <td width="150px"> 
                     <Button className={buttonStatus === "Acheter" ? "ui mini teal button" : "ui mini orange button"}
-                            style={{width:"90px", maxWidth: "90px"}} 
-                            onClick={() => {
-                                if (buttonStatus === "Vendre") {
-                                    changeButtonStatus()
-                                    let index = portfolio.findIndex( element => element.coin === props.symbol)
-                                    portfolio.splice(index, 1)
-                                    setDisplay("none")
-                                    toast.success('👍 Vendu avec succes!', {
-                                        toastId: 'info2',
-                                        position: "top-right",
-                                        autoClose: 2000,
-                                        hideProgressBar: false,
-                                        closeOnClick: true,
-                                        pauseOnHover: true,
-                                        draggable: true,
-                                        progress: undefined,
-                                        });
-                                }
-                                
-                                if (buttonStatus === "Acheter") {
-                                    changeButtonStatus()
-                                    setPortfolio(prev => [...prev, {coin: props.symbol, 
+                        style={{width:"90px", maxWidth: "90px"}} 
+                        onClick={() => {
+                            if (buttonStatus === "Vendre") {
+                                changeButtonStatus()
+                                let index = portfolio.findIndex( element => element.coin === props.symbol)
+                                portfolio.splice(index, 1)
+                                setDisplay("none")
+                                toast.success('👍 Vendu avec succes!', {
+                                    toastId: 'info2',
+                                    position: "top-right",
+                                    autoClose: 2000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    });
+                            }
+                            
+                            if (buttonStatus === "Acheter") {
+                                changeButtonStatus()
+                                setPortfolio(prev => [...prev, {
+                                                                    img: props.img,    
+                                                                    coin: props.symbol, 
                                                                     prixAchat: props.prix
-                                                                    } 
-                                                         ])
-                                    setDisplay("none")
-                                    
-                                    toast.success('👍 Ajouter avec succes!', {
-                                        toastId: 'info2',
-                                        position: "top-right",
-                                        autoClose: 2000,
-                                        hideProgressBar: false,
-                                        closeOnClick: true,
-                                        pauseOnHover: true,
-                                        draggable: true,
-                                        progress: undefined,
-                                        });
-                                }}}>
-                            {buttonStatus}
+                                                                } 
+                                                            ])
+                                setDisplay("none")
+                                
+                                toast.success('👍 Ajouter avec succes!', {
+                                    toastId: 'info2',
+                                    position: "top-right",
+                                    autoClose: 2000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    });
+                            }}}>
+                        {buttonStatus}
                     </Button>
                 </td>
             </tr>
@@ -137,10 +137,24 @@ export default function TableBody(props) {
                     
                     <div>
                         <br/>
-                        <span>Symbol: {props.symbol} </span><br/>
-                        <span>Rang de capitalisation: {props.rangCap}</span><br/>
-                        <span>Approvisionnement total: {addCommas(props.totalSupply)}</span><br/>
-                        <span>Approvisionnement maximum: {addCommas(props.maxSupply)}</span>
+                        <table className="innerTable">
+                            <tr >
+                                <td>Symbol:</td>
+                                <td><strong>{props.symbol}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Rang de capitalisation:</td>
+                                <td><strong>{props.rangCap}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Approvisionnement total:</td>
+                                <td><strong>{addCommas(props.totalSupply)}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Approvisionnement maximum: </td>
+                                <td><strong>{addCommas(props.maxSupply)}</strong></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
                 <br/>

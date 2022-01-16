@@ -1,59 +1,39 @@
 import React, { useCallback, useState } from "react";
-import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
+import { Container } from "semantic-ui-react";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 }
-];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#bdb76b", "#add8e6"];
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  const customLabel = (data) => {
+    return (
+      `${data.name}: ${data.value.toFixed(0)}%`
+    )
+  }
 
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
+  export default function PortfolioChart(props) {
 
-export default function App() {
-  return (
-    <PieChart width={200} height={200}>
-      <Pie
-        data={data}
-        cx={100}
-        cy={100}
-        labelLine={false}
-        label={renderCustomizedLabel}
-        outerRadius={80}
-        fill="#8884d8"
-        dataKey="value"
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-    </PieChart>
-  );
+    return (
+        <PieChart width={320} height={230}>
+          <Pie
+            data={props.pieData}
+            cx={160}
+            cy={110}
+            isAnimationActive={true}
+            labelLine={true}
+            label={customLabel}
+            outerRadius={80}
+            fill="#8884d8"
+          >
+            {props.pieData.map((entry, index) => 
+              (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              )
+            )}
+          </Pie>
+        </PieChart>
+    )
 }
+
+ 
+

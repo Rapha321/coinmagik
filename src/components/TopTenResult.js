@@ -9,9 +9,22 @@ import {
     Legend
   } from "recharts";
   import { Button, Card, Container, Image } from "semantic-ui-react";
+import AllCoins from './AllCoins';
 
 
 export default function TopTenResult(props) {
+
+    const addCommas = (nStr) => {
+        nStr += '';
+        var x = nStr.split('.');
+        var x1 = x[0];
+        var x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
 
     return (
         <div>
@@ -29,7 +42,7 @@ export default function TopTenResult(props) {
                     </LineChart>
                 </div>
 
-                <Card>
+                <Card style={{width: "320px"}}>
                     <Card.Content>
                     <Image
                         floated='right'
@@ -37,21 +50,46 @@ export default function TopTenResult(props) {
                         src={props.topten[`url${props.i + 1}`]}
                     />
                     <Card.Header>{props.topten[`n${props.i + 1}`]}</Card.Header>
-                    <Card.Meta>Rang de capitalisation boursière: {props.topten[`rank${props.i + 1}`]} </Card.Meta>
+                    <Card.Meta>Rang de cap. boursière: <strong>{props.topten[`rank${props.i + 1}`]}</strong> </Card.Meta>
                     <Card.Description>
-                        Steve wants to add you to the group <strong>best friends</strong>
+                        
+                        {
+                            props.coins.map(coin => {
+                                
+                                if (coin.market_cap_rank === props.topten[`rank${props.i + 1}`]) {
+                                    
+                                    return (
+                                        <table className="cardDescr-topTen">
+                                            <tr>
+                                                <td>Prix actuel: </td>
+                                                <td><strong>{addCommas(coin.current_price.toFixed(5))}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cap. boursière: </td>
+                                                <td><strong>{addCommas(coin.market_cap.toFixed(0))}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td style={{paddingRight: "15px"}}>Approv. en circulation: </td>
+                                                <td><strong>{addCommas(coin.circulating_supply.toFixed(0))}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Haut du jour: </td>
+                                                <td><strong>{addCommas(coin.high_24h.toFixed(4))}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Bas du jour: </td>
+                                                <td><strong>{addCommas(coin.low_24h.toFixed(4))}</strong></td>
+                                            </tr>
+                                        </table>
+                                    )
+                                    
+                                }
+                            })
+                        }
+                       
                     </Card.Description>
                     </Card.Content>
-                    <Card.Content extra>
-                    <div className='ui two buttons'>
-                        <Button basic color='green'>
-                        Ajouter
-                        </Button>
-                        <Button basic color='red'>
-                        Supprimer
-                        </Button>
-                    </div>
-                    </Card.Content>
+                  
                 </Card>
             </div>
 

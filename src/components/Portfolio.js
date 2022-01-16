@@ -8,17 +8,23 @@ export default function Portfolio(props) {
     const [portfolio, setPortfolio] = useContext(PortfolioContext)
     const [actuel, setActuel] = useState(0);
     const [initial, setInitial] = useState(0);
-
+    let pieData = []
     let actualInvest = 0;
 
     portfolio.map(pfolio => {
-        props.data.map(data => {
-            if (pfolio.coin === data.symbol) {
-                actualInvest += (100000 / pfolio.prixAchat) * data.current_price 
+        props.data.map(x => {
+            if (pfolio.coin === x.symbol) {
+                actualInvest += (100000 / pfolio.prixAchat) * x.current_price 
+                pieData = [...pieData, {
+                                          "name": pfolio.coin,
+                                          "value": (100000 / pfolio.prixAchat) * x.current_price /actuel * 100
+                                        }
+                           ]
             }
         })
     })
 
+    console.log("name: ", pieData)
 
     useEffect(() => {
        setInitial(portfolio.length * 100000)
@@ -44,7 +50,6 @@ export default function Portfolio(props) {
 
 
     return (
-        
         <Container>
             <br/>
 
@@ -54,7 +59,7 @@ export default function Portfolio(props) {
                 <div>
                     <div style={{display: "flex", marginBottom: "20px"}}>
                         <div style={{marginLeft: "5%"}}>
-                            <PortfolioChart />
+                            <PortfolioChart pieData={pieData} />
                         </div>
                         <div style={{marginLeft: "auto", marginTop: "auto", marginBottom: "auto", marginRight: "5%"}}>
                             <Statistic.Group  >

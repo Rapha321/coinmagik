@@ -13,21 +13,21 @@ import TopTenResult from "./TopTenResult";
 
 export default function TopTen(props) {
 
-let topTen = [ 
-              { rank1: 1, n1:"", url1:"", p1:0 }, 
-              { rank2: 1, n2:"", url2:"", p2:0 }, 
-              { rank3: 1, n3:"", url3:"", p3:0 }, 
-              { rank4: 1, n4:"", url4:"", p4:0 },
-              { rank5: 1, n5:"", url5:"", p5:0 }, 
-              { rank6: 1, n6:"", url6:"", p6:0 },
-              { rank7: 1, n7:"", url7:"", p7:0 },
-              { rank8: 1, n8:"", url8:"", p8:0 },
-              { rank9: 1, n9:"", url9:"", p9:0 },
-              { rank10: 1, n10:"", url10:"", p10:0 }
+  let topTen = [ 
+                { rank1: 1, n1:"", url1:"", p1:0 }, 
+                { rank2: 1, n2:"", url2:"", p2:0 }, 
+                { rank3: 1, n3:"", url3:"", p3:0 }, 
+                { rank4: 1, n4:"", url4:"", p4:0 },
+                { rank5: 1, n5:"", url5:"", p5:0 }, 
+                { rank6: 1, n6:"", url6:"", p6:0 },
+                { rank7: 1, n7:"", url7:"", p7:0 },
+                { rank8: 1, n8:"", url8:"", p8:0 },
+                { rank9: 1, n9:"", url9:"", p9:0 },
+                { rank10: 1, n10:"", url10:"", p10:0 }
           ]
 
 
-   props.data.map(x => {
+  props.data.map(x => {
                 for (let i = 0; i < 10; i++) {
                     if (x.market_cap_rank === i+1) {
                       topTen[i][`rank${i+1}`]= x.market_cap_rank
@@ -66,7 +66,7 @@ return (
     <Container fluid>
       <br/>
 
-      {topTen.map((topten, i) => <TopTenResult topten={topten} i={i} topTenData={topTenData} />)}
+      {topTen.map((topten, i) => <TopTenResult topten={topten} i={i} topTenData={topTenData} coins={props.data}/>)}
 
     </Container>
 

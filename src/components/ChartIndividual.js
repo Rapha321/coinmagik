@@ -29,11 +29,11 @@ export default function ChartIndividual(props) {
   }
 
   return (
-      <div style = {{display: "flex", flexDirection: "row"}}>
+      <div style = {{display: "flex", flexDirection: "row", marginTop: "15px"}}>
         <div>
           <AreaChart
             width={300}
-            height={100}
+            height={130}
             data={data1}
             margin={{
                 top: 10,

@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from "recharts";
-import { Button, Card, Container, Image } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import TopTenResult from "./TopTenResult";
 
+
+// recu props de Header.js
 export default function TopTen(props) {
 
+  // Definir les donnees pour les top 10 coins
   let topTen = [ 
                 { rank1: 1, n1:"", url1:"", p1:0 }, 
                 { rank2: 1, n2:"", url2:"", p2:0 }, 
@@ -26,17 +20,18 @@ export default function TopTen(props) {
                 { rank10: 1, n10:"", url10:"", p10:0 }
           ]
 
-
+          
+  // Remplir les donnes pour les top 10 coins
   props.data.map(x => {
-                for (let i = 0; i < 10; i++) {
-                    if (x.market_cap_rank === i+1) {
-                      topTen[i][`rank${i+1}`]= x.market_cap_rank
-                      topTen[i][`n${i+1}`]= x.name
-                      topTen[i][`url${i+1}`]= x.image
-                      topTen[i][`p${i+1}`]=x.sparkline_in_7d.price
-                    }
-                }
-           })
+                        for (let i = 0; i < 10; i++) {
+                            if (x.market_cap_rank === i+1) {
+                              topTen[i][`rank${i+1}`]= x.market_cap_rank
+                              topTen[i][`n${i+1}`]= x.name
+                              topTen[i][`url${i+1}`]= x.image
+                              topTen[i][`p${i+1}`]=x.sparkline_in_7d.price
+                            }
+                        }
+                  })
 
 
   let prix = {};
@@ -44,6 +39,7 @@ export default function TopTen(props) {
   let n = 1;
 
 
+  //  Utilise chaque 5eme prix, puisque 160 prix ne pas bien presentable sur le diagramme
   for (let i = 1; i < 160; i+=5) {
 
     for (let item of topTen) {
@@ -53,7 +49,6 @@ export default function TopTen(props) {
       } else {
         n++;
       }
-      
     }
     topTenData.push(prix)
     prix = {}
@@ -61,13 +56,11 @@ export default function TopTen(props) {
   }
 
 
-return (
+  return (
 
     <Container fluid>
       <br/>
-
       {topTen.map((topten, i) => <TopTenResult topten={topten} i={i} topTenData={topTenData} coins={props.data}/>)}
-
     </Container>
 
   )

@@ -1,8 +1,9 @@
-
 import React from "react";
 import TableHeader from "./TableHeader";
 import TableBody from './TableBody';
 
+
+// recu props de Header.js
 const AllCoins = (props) => {
 
     return (
@@ -10,12 +11,14 @@ const AllCoins = (props) => {
         <div >
             <table className="table table-striped">
 
+                {/* ENTETE DU TABLE QUI AFFICHE TOUS LES COINS */}
                 <thead>
                     <tr>
                         <TableHeader />
                     </tr>
                 </thead>
 
+                {/* BODY DU TABLE QUI AFFICHE TOUS LES COINS */}
                 <tbody>
                     { Object.keys(props.data).map((x) => <TableBody 
                                                         id={props.data[x].id} 
@@ -38,6 +41,5 @@ const AllCoins = (props) => {
       </div>
     )
 }
-
 
 export default AllCoins;

@@ -2,16 +2,21 @@ import React, { useState, useEffect, useContext } from "react"
 import { Button, Container } from "semantic-ui-react"
 import ChartIndividual from "./ChartIndividual"
 import {PortfolioContext}  from "./PortfolioContext"
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
+
+// recu props de AllCoins.js
 export default function TableBody(props) {
 
     const [display, setDisplay] = useState("none")
     const [buttonStatus, setButtonStatus] = useState("Acheter")
     const [hover, setHover] = useState(false)
     
+    // On utilise/set les state definir dans PortfolioContext.js
     const [portfolio, setPortfolio] = useContext(PortfolioContext)
 
+    // Si un coin est inclus dans le portfolio (ca veux dire que le user a deja 
+    // acheter ce coin), change le contenu du bouton a 'Vendre'
     useEffect(() => {
         for (let element of portfolio) {
             if (element.coin === props.symbol) {
@@ -20,6 +25,9 @@ export default function TableBody(props) {
         }
     }, [portfolio])
 
+
+    // Quand le user ecrit quelque chose dans le champ Search, affiche seulement
+    // les row qui contient le contenu du mot rechercher
     const afficher = () => {
         if (props.search === "" || props.id.includes(props.search)) {
             return "inline-block";
@@ -28,15 +36,16 @@ export default function TableBody(props) {
         }
     }
 
-
+    // Si le user click sur un row, set display a 'inline-block' sinon a 'none'
     const handleClick = () => {
         if (display === "none") {
-            setDisplay(prev => "inline-block");
+            setDisplay("inline-block");
         } else {
-            setDisplay(prev => "none")
+            setDisplay("none")
         }
     }
 
+    // Fonction pour ajouter des virgule dans un chiffre
     const addCommas = (nStr) => {
         nStr += '';
         var x = nStr.split('.');
@@ -51,10 +60,11 @@ export default function TableBody(props) {
 
 
     let styles = {
-        paddingRight: '60px'
+        paddingRight: '60px',
+        display: afficher()
     }
 
-
+    // Si le user achete un coin, change le contenu du bouton a 'vendre' et vice versa
     const changeButtonStatus = () => {
         if (buttonStatus === "Acheter") {
             setButtonStatus("Vendre")
@@ -63,22 +73,24 @@ export default function TableBody(props) {
         }
     }
 
+    // Quand le user hover sur un row, change le couleur du row
     const backgroundOnHover = hover ? "#afeeee" : "#e0ffff"
 
 
     return (
         <Container>
-            <tr style={{display: afficher(), backgroundColor: backgroundOnHover}} 
+            
+            {/* DEFINIR LE ROW POUR CHAQUE COIN */}
+            <tr style={{backgroundColor: backgroundOnHover}} 
                 key={props.symbol} 
-                onClick={handleClick} 
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}>
-                <td width="70px" > <img alt="logo" src={props.img} width="25px"/> </td>
-                <td width="200px" > {props.id} </td>
-                <td width="200px" align="right" style={styles}> {addCommas(props.prix.toFixed(4))} </td>
-                <td width="200px" align="right" style={styles}> {props.prixChange.toFixed(5)} </td>
-                <td width="200px" align="right" style={styles}> {addCommas(props.volTotal)} </td>
-                <td width="150px"> 
+                <td width="70px" style={{display: afficher()}} onClick={handleClick} > <img alt="logo" src={props.img} width="25px"/> </td>
+                <td width="200px" style={{display: afficher()}} onClick={handleClick} > {props.id} </td>
+                <td width="200px" align="right" style={styles} onClick={handleClick} > {addCommas(props.prix.toFixed(4))} </td>
+                <td width="200px" align="right" style={styles} onClick={handleClick} > {props.prixChange.toFixed(5)} </td>
+                <td width="200px" align="right" style={styles} onClick={handleClick} > {addCommas(props.volTotal)} </td>
+                <td width="150px" style={{display: afficher()}}> 
                     <Button className={buttonStatus === "Acheter" ? "ui mini teal button" : "ui mini orange button"}
                         style={{width:"90px", maxWidth: "90px"}} 
                         onClick={() => {
@@ -124,6 +136,8 @@ export default function TableBody(props) {
                     </Button>
                 </td>
             </tr>
+
+            {/* DEFINIR LE DIAGRAMME ET INFO ADDITIONNEL POUR CHAQUE COIN */}
             <tr style={{display: display}} id="chart-div"> 
                 <div className="infoAditionnel">
                     <div>

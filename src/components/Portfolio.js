@@ -3,6 +3,8 @@ import {PortfolioContext}  from "./PortfolioContext"
 import { Container, Segment, Statistic } from 'semantic-ui-react'
 import PortfolioChart from '../components/PortfolioChart'
 
+
+// recu props de Header.js
 export default function Portfolio(props) {
 
     const [portfolio, setPortfolio] = useContext(PortfolioContext)
@@ -11,6 +13,8 @@ export default function Portfolio(props) {
     let pieData = []
     let actualInvest = 0;
 
+    
+    // Definir les donner pour afficher le pieChart
     portfolio.map(pfolio => {
         props.data.map(x => {
             if (pfolio.coin === x.symbol) {
@@ -24,8 +28,8 @@ export default function Portfolio(props) {
         })
     })
 
-    console.log("name: ", pieData)
 
+    // Calcul le total du Investissement initial et actuel a chaque fois que portfolio.js est appeler
     useEffect(() => {
        setInitial(portfolio.length * 100000)
        setActuel(actualInvest)
@@ -36,6 +40,8 @@ export default function Portfolio(props) {
         paddingLeft: '60px'
     }
 
+
+    // Fonction pour mettre des virgules dans des chiffres
     const addCommas = (nStr) => {
         nStr += '';
         var x = nStr.split('.');
@@ -54,14 +60,19 @@ export default function Portfolio(props) {
             <br/>
 
             {
+                // SI LE PORTFOLIO EST VIDE, AFFICHE UN MESSAGE SINON AFFICHE LE PORTFOLIO
                 portfolio.length === 0 ? <h1>Votre portfolio est vide!</h1> :
 
                 <div>
                     <div style={{display: "flex", marginBottom: "20px"}}>
-                        <div style={{marginLeft: "5%"}}>
+
+                        {/* AFFICHE LE PIECHART */}
+                        <div style={{marginLeft: "2%"}}>
                             <PortfolioChart pieData={pieData} />
                         </div>
-                        <div style={{marginLeft: "auto", marginTop: "auto", marginBottom: "auto", marginRight: "5%"}}>
+
+                        {/* AFFICHE LE TOTAL DE L'INVESTISSEMENT INITIAL, ACTUEL ET GAIN/PERTE */}
+                        <div style={{marginLeft: "auto", marginTop: "auto", marginBottom: "auto", marginRight: "auto"}}>
                             <Statistic.Group  >
                                 <Statistic color="blue">
                                     <Statistic.Value>{addCommas(initial.toFixed(0))}</Statistic.Value>
@@ -80,6 +91,7 @@ export default function Portfolio(props) {
                     </div>
 
                     <div>
+                        {/* AFFICHE LES COINS QUE LE USER A ACHETER */}
                         <table className="table table-striped">
                             <thead>
                                 <th width="70px"> </th>

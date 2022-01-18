@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from "react";
-import { PieChart, Pie, Cell, Tooltip } from "recharts";
-import { Container } from "semantic-ui-react";
+import React from "react";
+import { PieChart, Pie, Cell } from "recharts";
 
 
+  // Definir les couleurs du piechart
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#bdb76b", "#add8e6"];
 
+  // Definir le label du pieChart
   const customLabel = (data) => {
     return (
       `${data.name}: ${data.value.toFixed(0)}%`
@@ -14,6 +15,7 @@ import { Container } from "semantic-ui-react";
   export default function PortfolioChart(props) {
 
     return (
+        //AFFICHER LE PIECHART AVEC LES DONNEES RECU COMME PROPS DU PORTFOLIO.JS
         <PieChart width={320} height={230}>
           <Pie
             data={props.pieData}

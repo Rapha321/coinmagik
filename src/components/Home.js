@@ -1,29 +1,26 @@
 import React from 'react'
-import { Button, Container } from 'semantic-ui-react'
-import { useHistory, BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import Header from './Header';
+import { useHistory } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 export default function Home() {
 
     let history = useHistory();
 
+    // NAVIGUER A LA PAGE PRINCIPAL
     const handleClick = () => {
         history.push('/header')
-
     }
 
     return (
-            <div style={{textAlign: "center", marginTop: "10%", marginBottom: "5%"}}>
-                <h1 style={{fontSize: "5em"}}>ꓘoinMagiK</h1>
-                <h1 style={{fontSize: "3em", marginBottom: "5%"}}>Bienvenue</h1>
-                <button className="ui positive button" 
-                        style={{width: "15%", 
-                                height: "50px", 
-                                fontSize: "1.5em", 
-                                paddingBottom: "25px"}} 
-                        onClick={handleClick}>
-                    Commencer!
-                </button>
-            </div>
+        <div style={{textAlign: "center", marginTop: "10%", marginBottom: "5%"}}>
+            
+            <h1 style={{fontSize: "5em", color: "orange", textShadow: "0 0 4px green"}}>ꓘoinFolio</h1>
+            <h1 style={{fontSize: "3em", marginBottom: "5%"}}>Bienvenue!</h1>
+
+            <Button variant="contained" size='large' onClick={handleClick} 
+                    style={{padding: "13px 30px", fontWeight: "bold", textShadow: "0 0 2px black"}}>
+                Commencer!
+            </Button>
+        </div>
     )
 }

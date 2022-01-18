@@ -8,6 +8,7 @@ export default function TableHeader(props) {
     }
 
     return (
+        // ENTETE DU TABLE
         <Container>
             <br/>
             <th width="70px"> </th>

@@ -8,12 +8,13 @@ import {
     Tooltip,
     Legend
   } from "recharts";
-  import { Button, Card, Container, Image } from "semantic-ui-react";
-import AllCoins from './AllCoins';
+  import { Card, Image } from "semantic-ui-react";
 
 
+// recu props de TopTen.js.js
 export default function TopTenResult(props) {
 
+    // FONCTION POUR AJOUTER DES VIRGULE DANS LES CHIFFRES
     const addCommas = (nStr) => {
         nStr += '';
         var x = nStr.split('.');
@@ -29,7 +30,10 @@ export default function TopTenResult(props) {
     return (
         <div>
 
+            {/* AFFICHER UN DIAGRAMME LINECHART ET UNE CARD POUR CHAQUE COIN */}
             <div className="topTen-section">
+
+                {/* DIAGRAMME LINECHART */}
                 <div>
                     <br/><br/>
                     <LineChart width={700} height={200} data={props.topTenData}>
@@ -42,6 +46,7 @@ export default function TopTenResult(props) {
                     </LineChart>
                 </div>
 
+                {/* CARD */}
                 <Card style={{width: "320px"}}>
                     <Card.Content>
                     <Image
@@ -52,12 +57,9 @@ export default function TopTenResult(props) {
                     <Card.Header>{props.topten[`n${props.i + 1}`]}</Card.Header>
                     <Card.Meta>Rang de cap. boursière: <strong>{props.topten[`rank${props.i + 1}`]}</strong> </Card.Meta>
                     <Card.Description>
-                        
                         {
                             props.coins.map(coin => {
-                                
                                 if (coin.market_cap_rank === props.topten[`rank${props.i + 1}`]) {
-                                    
                                     return (
                                         <table className="cardDescr-topTen">
                                             <tr>
@@ -82,14 +84,11 @@ export default function TopTenResult(props) {
                                             </tr>
                                         </table>
                                     )
-                                    
                                 }
                             })
                         }
-                       
                     </Card.Description>
                     </Card.Content>
-                  
                 </Card>
             </div>
 

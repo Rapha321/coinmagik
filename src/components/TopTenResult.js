@@ -58,6 +58,7 @@ export default function TopTenResult(props) {
                     <Card.Meta>Rang de cap. boursière: <strong>{props.topten[`rank${props.i + 1}`]}</strong> </Card.Meta>
                     <Card.Description>
                         {
+                            // eslint-disable-next-line
                             props.coins.map(coin => {
                                 if (coin.market_cap_rank === props.topten[`rank${props.i + 1}`]) {
                                     return (

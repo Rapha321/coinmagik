@@ -9,7 +9,7 @@ const ScrollButton = () =>{
   const btnStyle = {
         position: "fixed",
         width: "100%",
-        left: "75vw",
+        left: "87vw",
         bottom: "40px",
         height: "20px",
         fontSize: "3rem",

@@ -26,16 +26,16 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        />
+      />
 
-        <BrowserRouter>
+      <BrowserRouter>
         <Switch>
           <Route path={"/"} component={Home} exact/>
           <Route path={"/header"} component={Header} />
         </Switch>
+      </BrowserRouter>
 
-        </BrowserRouter>
-        <ScrollButton/>
+      <ScrollButton/>
     </PortfolioProvider>
 
   )

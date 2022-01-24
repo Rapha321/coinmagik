@@ -12,6 +12,8 @@ In your terminal, navigate to project_api folder and type npm install. Once ever
 to runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+Click here to access the deployed app: [ꓘoinFolio](https://coinfolio-chi.vercel.app/)
+
 
 ## Demo
 !["Demo koinFolio"](https://github.com/Rapha321/coinmagik/blob/master/blob/koinfolioDemo.gif)

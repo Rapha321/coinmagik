@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react"
+import axios from 'axios';
 import {PortfolioContext}  from "./PortfolioContext"
-import { Container, Segment, Statistic } from 'semantic-ui-react'
+import { Container, Segment, Statistic, Button } from 'semantic-ui-react'
 import PortfolioChart from '../components/PortfolioChart'
 
 
@@ -10,32 +11,76 @@ export default function Portfolio(props) {
     const [portfolio, setPortfolio] = useContext(PortfolioContext)
     const [actuel, setActuel] = useState(0);
     const [initial, setInitial] = useState(0);
+    const [result, setResult] = useState([]);
+    const [refresh, setRefresh] = useState(true);
     let pieData = []
     let actualInvest = 0;
 
-    
-    // Definir les donner pour afficher le pieChart
-    portfolio.map(pfolio => {
-        props.data.map(x => {
-            if (pfolio.coin === x.symbol) {
-                actualInvest += (100000 / pfolio.prixAchat) * x.current_price 
-                pieData = [...pieData, {
-                                          "name": pfolio.coin,
-                                          "value": (100000 / pfolio.prixAchat) * x.current_price /actuel * 100
-                                        }
-                           ]
-            }
-        })
-    })
+
 
 
     // Calcul le total du Investissement initial et actuel a chaque fois que portfolio.js est appeler
     useEffect(() => {
-       setInitial(portfolio.length * 100000)
-       setActuel(actualInvest)
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=true`)
+        .then((res) => { 
+            setResult(res.data) 
+
+        })
+        .catch((erreur) =>console.log(erreur))
     }, [])
 
 
+    // Definir les donner pour afficher le pieChart
+    portfolio.map(pfolio => {
+        result.map(x => {
+            if (pfolio.coin === x.symbol) {
+                actualInvest += (100000 / pfolio.prixAchat) * x.current_price 
+                pieData = [...pieData, {
+                                            "name": pfolio.coin,
+                                            "value": (100000 / pfolio.prixAchat) * x.current_price /actuel * 100
+                                        }
+                            ]
+            }
+        })
+    })
+
+    // Set le montant initial et actuel
+    useEffect(() => {
+        setInitial(portfolio.length * 100000);
+        setActuel(actualInvest)
+    }, [])
+
+    
+    // Apel l'api a chaque fois qu'on click sur le bouton refresh
+    useEffect(() => {
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=true`)
+        .then((res) => {    
+                            setResult(res.data); 
+                            actualInvest = 0;
+                            portfolio.map(pfolio => {
+                                res.data.map(x => {
+                                    if (pfolio.coin === x.symbol) {
+                                        actualInvest += (100000 / pfolio.prixAchat) * x.current_price 
+                                        pieData = [...pieData, {
+                                                                    "name": pfolio.coin,
+                                                                    "value": (100000 / pfolio.prixAchat) * x.current_price /actuel * 100
+                                                                }
+                                                    ]
+                                    }
+                                })
+                            })
+                            setActuel(actualInvest)
+                        })
+        .catch((erreur) =>console.log(erreur));
+
+    }, [refresh])
+
+    // A chaque fois qu'on click  sur le bouton refresh, set refresh a false ou true
+    const onRefresh = () => {
+        setRefresh(!refresh)
+    }
+
+    
     let styles = {
         paddingLeft: '60px'
     }
@@ -72,7 +117,15 @@ export default function Portfolio(props) {
                         </div>
 
                         {/* AFFICHE LE TOTAL DE L'INVESTISSEMENT INITIAL, ACTUEL ET GAIN/PERTE */}
-                        <div style={{marginLeft: "auto", marginTop: "auto", marginBottom: "auto", marginRight: "auto"}}>
+                        <div style={{marginLeft: "auto", marginTop: "20px", marginBottom: "auto", marginRight: "auto"}}>
+                            <div style={{display: "flex"}}>    
+                                <h3>Portfolio Crypto Equilibré - USD</h3>
+                                <Button inverted size='mini' color='blue' onClick={onRefresh} 
+                                        style={{marginLeft: "auto", marginTop: "2%"}}>
+                                    Refresh
+                                </Button>
+                            </div>
+                            <br/>
                             <Statistic.Group  >
                                 <Statistic color="blue">
                                     <Statistic.Value>{addCommas(initial.toFixed(0))}</Statistic.Value>
@@ -106,7 +159,7 @@ export default function Portfolio(props) {
                             {
                                 portfolio.map(pfolio => {
                                     return (
-                                        props.data.map(data => {
+                                        result.map(data => {
                                             if (pfolio.coin === data.symbol) {
                                                 return (
                                                     <tbody>

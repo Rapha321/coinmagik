@@ -4,7 +4,7 @@
 Coded with :heart: by [Raphael Albern](https://github.com/Rapha321)
 
 ## Stack
-ꓘoinFolio is built with HTML, CSS, Javascript, React (Hooks used: useState, useEffect, useContext), semanticUI, MaterialUI, Bootstrap react, Toastify. All the data is fetched from CoinGecko API using fetch.
+ꓘoinFolio is built with HTML, CSS, Javascript, React (Hooks used: useState, useEffect, useContext), semanticUI, MaterialUI, Bootstrap react, Toastify. All the data is fetched from CoinGecko API using fetch and axios.
 
 
 ### How to run the app

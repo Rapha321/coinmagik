@@ -9,16 +9,17 @@ const AllCoins = (props) => {
     return (
        <div className="details">
         <div >
+            {/* TABLE QUI AFFICHE TOUS LES COINS */}
             <table className="table table-striped">
 
-                {/* ENTETE DU TABLE QUI AFFICHE TOUS LES COINS */}
+                {/* ENTETE DU TABLE */}
                 <thead>
                     <tr>
                         <TableHeader />
                     </tr>
                 </thead>
 
-                {/* BODY DU TABLE QUI AFFICHE TOUS LES COINS */}
+                {/* BODY DU TABLE */}
                 <tbody>
                     { Object.keys(props.data).map((x) => <TableBody 
                                                         id={props.data[x].id} 

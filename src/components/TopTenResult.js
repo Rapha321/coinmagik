@@ -1,14 +1,14 @@
 import React from "react";
 import {
-    LineChart,
-    Line,
+    AreaChart,
+    Area,
     XAxis,
     YAxis,
     CartesianGrid,
     Tooltip,
     Legend
   } from "recharts";
-  import { Card, Image } from "semantic-ui-react";
+  import { Card, CardHeader, Image } from "semantic-ui-react";
 
 
 // recu props de TopTen.js.js
@@ -33,32 +33,42 @@ export default function TopTenResult(props) {
             {/* AFFICHER UN DIAGRAMME LINECHART ET UNE CARD POUR CHAQUE COIN */}
             <div className="topTen-section">
 
-                {/* DIAGRAMME LINECHART */}
+                {/* DIAGRAMME AREACHART */}
                 <div>
                     <br/><br/>
-                    <LineChart width={700} height={200} data={props.topTenData}>
-                    <br/>
-                    <CartesianGrid strokeDasharray="1 1" />
-                    <XAxis dataKey={`n${props.i + 1}`} padding={{ left: 30, right: 30 }} />
-                    <YAxis />
-                    <Tooltip />
-                    <Line type="linear" dataKey={`p${props.i + 1}`} stroke="#8884d8" />
-                    </LineChart>
+                    <AreaChart
+                        width={700}
+                        height={200}
+                        data={props.topTenData}
+                        margin={{
+                            top: 10,
+                            right: 30,
+                            left: 0,
+                            bottom: 0
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey={`n${props.i + 1}`} padding={{ left: 30, right: 30 }} />
+                        <YAxis />
+                        <Tooltip />
+                        <Area type="linear" dataKey={`p${props.i + 1}`} stroke="#82ca9d" fill="#87ceeb" />
+                    </AreaChart>
                 </div>
 
                 {/* CARD */}
                 <Card style={{width: "320px"}}>
-                    <Card.Content>
-                    <Image
-                        floated='right'
-                        size='mini'
-                        src={props.topten[`url${props.i + 1}`]}
-                    />
-                    <Card.Header>{props.topten[`n${props.i + 1}`]}</Card.Header>
-                    <Card.Meta>Rang de cap. boursière: <strong>{props.topten[`rank${props.i + 1}`]}</strong> </Card.Meta>
+                    <Card.Content >
+                        <CardHeader style={{backgroundColor: "aquamarine", padding: "5px", borderRadius: "5px"}}>
+                        <Image
+                            floated='right'
+                            size='mini'
+                            src={props.topten[`url${props.i + 1}`]}
+                        />
+                        <Card.Header>{props.topten[`n${props.i + 1}`]}</Card.Header>
+                        <Card.Meta>Rang de cap. boursière: <strong>{props.topten[`rank${props.i + 1}`]}</strong> </Card.Meta>
+                    </CardHeader>
                     <Card.Description>
                         {
-                            // eslint-disable-next-line
                             props.coins.map(coin => {
                                 if (coin.market_cap_rank === props.topten[`rank${props.i + 1}`]) {
                                     return (

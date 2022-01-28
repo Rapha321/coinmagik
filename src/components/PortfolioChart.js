@@ -36,6 +36,3 @@ import { PieChart, Pie, Cell } from "recharts";
         </PieChart>
     )
 }
-
- 
-

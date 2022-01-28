@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react"
 import axios from 'axios';
 import {PortfolioContext}  from "./PortfolioContext"
-import { Container, Segment, Statistic, Button } from 'semantic-ui-react'
+import { Container, Statistic, Button } from 'semantic-ui-react'
 import PortfolioChart from '../components/PortfolioChart'
 
 
@@ -17,20 +17,15 @@ export default function Portfolio(props) {
     let actualInvest = 0;
 
 
-
-
     // Calcul le total du Investissement initial et actuel a chaque fois que portfolio.js est appeler
     useEffect(() => {
         axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=true`)
-        .then((res) => { 
-            setResult(res.data) 
-
-        })
+        .then((res) => setResult(res.data) )
         .catch((erreur) =>console.log(erreur))
     }, [])
 
 
-    // Definir les donner pour afficher le pieChart
+    // Definir les donner pour afficher le pieChart et calculer le montant actuel d'investisement (actualInvest)
     portfolio.map(pfolio => {
         result.map(x => {
             if (pfolio.coin === x.symbol) {
@@ -38,8 +33,7 @@ export default function Portfolio(props) {
                 pieData = [...pieData, {
                                             "name": pfolio.coin,
                                             "value": (100000 / pfolio.prixAchat) * x.current_price /actuel * 100
-                                        }
-                            ]
+                                        }]
             }
         })
     })
@@ -80,7 +74,7 @@ export default function Portfolio(props) {
         setRefresh(!refresh)
     }
 
-    
+    // Definir le styles pour chaque cell du table
     let styles = {
         paddingLeft: '60px'
     }
@@ -187,6 +181,5 @@ export default function Portfolio(props) {
             }
 
         </Container>
-
     )
 }

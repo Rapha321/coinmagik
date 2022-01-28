@@ -22,6 +22,4 @@ export default function PriceMessage(props) {
         </div>
 
     )
-
 }
-

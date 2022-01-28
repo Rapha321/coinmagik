@@ -6,7 +6,7 @@ import TopTenResult from "./TopTenResult";
 // recu props de Header.js
 export default function TopTen(props) {
 
-  // Definir les donnees pour les top 10 coins
+  // Definir la structure de donnees pour les top 10 coins
   let topTen = [ 
                 { rank1: 1, n1:"", url1:"", p1:0 }, 
                 { rank2: 1, n2:"", url2:"", p2:0 }, 
@@ -21,7 +21,8 @@ export default function TopTen(props) {
           ]
 
           
-  // Remplir les donnes pour les top 10 coins
+  // Remplir la structure de donnees pour les top 10 coins en prenant en consideration le
+  // classement par 'Rang de capitalisation'
   props.data.map(x => {
                         for (let i = 0; i < 10; i++) {
                             if (x.market_cap_rank === i+1) {
@@ -38,8 +39,7 @@ export default function TopTen(props) {
   let topTenData = [];
   let n = 1;
 
-
-  //  Utilise chaque 5eme prix, puisque 160 prix ne pas bien presentable sur le diagramme
+  // Remplir le tableau topTenData avec les prix historique pour representer dans un diagramme.
   for (let i = 1; i < 160; i+=5) {
 
     for (let item of topTen) {
@@ -55,7 +55,6 @@ export default function TopTen(props) {
 
   }
 
-
   return (
 
     <Container fluid>
@@ -64,5 +63,4 @@ export default function TopTen(props) {
     </Container>
 
   )
-
 }

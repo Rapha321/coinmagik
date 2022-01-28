@@ -37,12 +37,10 @@
   }
 }
 
-
 .ui striped {
   margin-bottom: 0;
   margin-top: 0;
 }
-
 
 #flow-price {
   animation-name: slide; 
@@ -60,7 +58,6 @@
 .flow-price-wrapper {
   overflow: hidden;
 }
-
 
 .browserRouter {
   display: flex;

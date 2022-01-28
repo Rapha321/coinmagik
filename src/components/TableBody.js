@@ -175,7 +175,4 @@ export default function TableBody(props) {
             </tr>
         </Container>
     ) 
-
 }
-
-

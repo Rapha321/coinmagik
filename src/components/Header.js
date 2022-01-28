@@ -23,7 +23,6 @@ export default function Header() {
 
         // Mettre le focus sur le champ Search
         searchRef.current.focus();
-        
     }, [currency])
 
     // Array de currency que l'utilisateur peux choisir
@@ -84,7 +83,7 @@ export default function Header() {
                
                 </Message>
 
-                {/* AFFICHER LES PRIX DEROULANTE */}
+                {/* AFFICHER LE BAR DU PRIX DEROULANTE */}
                 <div className="header-price">
                     <PriceMessage data={data}/>
                 </div>
@@ -96,10 +95,8 @@ export default function Header() {
                     <Route path="/Portfolio"> <Portfolio cur={currency} data={data}/> </Route>
                 </Switch>
             </BrowserRouter>
-            
 
         </Container>
-        
     )
 }
  

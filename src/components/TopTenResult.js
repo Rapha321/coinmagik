@@ -65,7 +65,7 @@ export default function TopTenResult(props) {
                             src={props.topten[`url${props.i + 1}`]}
                         />
                         <Card.Header>{props.topten[`n${props.i + 1}`]}</Card.Header>
-                        <Card.Meta>Rang de cap. boursière: <strong>{props.topten[`rank${props.i + 1}`]}</strong> </Card.Meta>
+                        <Card.Meta>Stock market cap ranking: <strong>{props.topten[`rank${props.i + 1}`]}</strong> </Card.Meta>
                     </CardHeader>
                     <Card.Description>
                         {
@@ -74,23 +74,23 @@ export default function TopTenResult(props) {
                                     return (
                                         <table className="cardDescr-topTen">
                                             <tr>
-                                                <td>Prix actuel: </td>
+                                                <td>Price: </td>
                                                 <td><strong>{addCommas(coin.current_price.toFixed(5))}</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>Cap. boursière: </td>
+                                                <td>Market cap: </td>
                                                 <td><strong>{addCommas(coin.market_cap.toFixed(0))}</strong></td>
                                             </tr>
                                             <tr>
-                                                <td style={{paddingRight: "15px"}}>Approv. en circulation: </td>
+                                                <td style={{paddingRight: "15px"}}>Approv. in circulation: </td>
                                                 <td><strong>{addCommas(coin.circulating_supply.toFixed(0))}</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>Haut du jour: </td>
+                                                <td>Day high: </td>
                                                 <td><strong>{addCommas(coin.high_24h.toFixed(4))}</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>Bas du jour: </td>
+                                                <td>Day low: </td>
                                                 <td><strong>{addCommas(coin.low_24h.toFixed(4))}</strong></td>
                                             </tr>
                                         </table>

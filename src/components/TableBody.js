@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 export default function TableBody(props) {
 
     const [display, setDisplay] = useState("none")
-    const [buttonStatus, setButtonStatus] = useState("Acheter")
+    const [buttonStatus, setButtonStatus] = useState("Buy")
     const [hover, setHover] = useState(false)
     
     // On utilise/set les state definir dans PortfolioContext.js
@@ -20,7 +20,7 @@ export default function TableBody(props) {
     useEffect(() => {
         for (let element of portfolio) {
             if (element.coin === props.symbol) {
-                setButtonStatus("Vendre")
+                setButtonStatus("Sell")
             }
         }
     }, [portfolio])
@@ -66,10 +66,10 @@ export default function TableBody(props) {
 
     // Si le user achete un coin, change le contenu du bouton a 'vendre' et vice versa
     const changeButtonStatus = () => {
-        if (buttonStatus === "Acheter") {
-            setButtonStatus("Vendre")
+        if (buttonStatus === "Buy") {
+            setButtonStatus("Sell")
         } else {
-            setButtonStatus("Acheter")
+            setButtonStatus("Buy")
         }
     }
 
@@ -91,15 +91,15 @@ export default function TableBody(props) {
                 <td width="200px" align="right" style={styles} onClick={handleClick} > {props.prixChange.toFixed(5)} </td>
                 <td width="200px" align="right" style={styles} onClick={handleClick} > {addCommas(props.volTotal)} </td>
                 <td width="150px" style={{display: afficher()}}> 
-                    <Button className={buttonStatus === "Acheter" ? "ui mini teal button" : "ui mini orange button"}
+                    <Button className={buttonStatus === "Buy" ? "ui mini teal button" : "ui mini orange button"}
                         style={{width:"90px", maxWidth: "90px"}} 
                         onClick={() => {
-                            if (buttonStatus === "Vendre") {
+                            if (buttonStatus === "Sell") {
                                 changeButtonStatus()
                                 let index = portfolio.findIndex( element => element.coin === props.symbol)
                                 portfolio.splice(index, 1)
                                 setDisplay("none")
-                                toast.success('👍 Vendu avec succes!', {
+                                toast.success('👍 Sell successful!', {
                                     toastId: 'info2',
                                     position: "top-right",
                                     autoClose: 2000,
@@ -111,7 +111,7 @@ export default function TableBody(props) {
                                     });
                             }
                             
-                            if (buttonStatus === "Acheter") {
+                            if (buttonStatus === "Buy") {
                                 changeButtonStatus()
                                 setPortfolio(prev => [...prev, {
                                                                     img: props.img,    
@@ -157,15 +157,15 @@ export default function TableBody(props) {
                                 <td><strong>{props.symbol}</strong></td>
                             </tr>
                             <tr>
-                                <td>Rang de capitalisation:</td>
+                                <td>Capitalization rank:</td>
                                 <td><strong>{props.rangCap}</strong></td>
                             </tr>
                             <tr>
-                                <td>Approvisionnement total:</td>
+                                <td>Total supply:</td>
                                 <td><strong>{addCommas(props.totalSupply)}</strong></td>
                             </tr>
                             <tr>
-                                <td>Approvisionnement maximum: </td>
+                                <td>Max supply: </td>
                                 <td><strong>{addCommas(props.maxSupply)}</strong></td>
                             </tr>
                         </table>

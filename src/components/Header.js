@@ -61,7 +61,7 @@ export default function Header() {
                                 <Menu className='menu'>
                                     <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/header/" exact={true}>Dashboard   </Menu.Item>
                                     <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/TopTen">Top 10    </Menu.Item>
-                                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/Portfolio">Mon Portfolio     </Menu.Item>
+                                    <Menu.Item as={NavLink} activeStyle={{ fontWeight: "bold", color:"red"}} to="/Portfolio">My Portfolio     </Menu.Item>
                                 </Menu>
                             </header>
                         </div>

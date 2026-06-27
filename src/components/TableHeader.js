@@ -12,11 +12,11 @@ export default function TableHeader(props) {
         <Container>
             <br/>
             <th width="70px"> </th>
-            <th width="200px">  Produit</th>
-            <th width="200px" align="right" style={styles}> Prix actuel</th>
-            <th width="200px" align="right" style={styles}> Changement Prix</th>
-            <th width="200px" align="right" style={styles}> Volume total</th>
-            <th width="150px"> Mon Portfolio </th>
+            <th width="200px">  Product</th>
+            <th width="200px" align="right" style={styles}> Price</th>
+            <th width="200px" align="right" style={styles}> Change in price</th>
+            <th width="200px" align="right" style={styles}> Volume</th>
+            <th width="150px"> My Portfolio </th>
         </Container>
     )
 }

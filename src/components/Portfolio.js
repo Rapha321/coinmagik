@@ -100,7 +100,7 @@ export default function Portfolio(props) {
 
             {
                 // SI LE PORTFOLIO EST VIDE, AFFICHE UN MESSAGE SINON AFFICHE LE PORTFOLIO
-                portfolio.length === 0 ? <h1>Votre portfolio est vide!</h1> :
+                portfolio.length === 0 ? <h1>Your portfolio is empty!</h1> :
 
                 <div>
                     <div style={{display: "flex", marginBottom: "20px"}}>
@@ -113,7 +113,7 @@ export default function Portfolio(props) {
                         {/* AFFICHE LE TOTAL DE L'INVESTISSEMENT INITIAL, ACTUEL ET GAIN/PERTE */}
                         <div style={{marginLeft: "auto", marginTop: "20px", marginBottom: "auto", marginRight: "auto"}}>
                             <div style={{display: "flex"}}>    
-                                <h3>Portfolio Crypto Equilibré - USD</h3>
+                                <h3>Portfolio Crypto Balanced - USD</h3>
                                 <Button inverted size='mini' color='blue' onClick={onRefresh} 
                                         style={{marginLeft: "auto", marginTop: "2%"}}>
                                     Refresh
@@ -123,15 +123,15 @@ export default function Portfolio(props) {
                             <Statistic.Group  >
                                 <Statistic color="blue">
                                     <Statistic.Value>{addCommas(initial.toFixed(0))}</Statistic.Value>
-                                    <Statistic.Label>initial</Statistic.Label>
+                                    <Statistic.Label>Initial</Statistic.Label>
                                 </Statistic>
                                 <Statistic color="green">
                                     <Statistic.Value>{addCommas(actuel.toFixed(0))}</Statistic.Value>
-                                    <Statistic.Label>actuel</Statistic.Label>
+                                    <Statistic.Label>Actual</Statistic.Label>
                                 </Statistic>
                                 <Statistic color="purple" size="large">
                                     <Statistic.Value>{addCommas((actuel - initial).toFixed(0))}</Statistic.Value>
-                                    <Statistic.Label>gain/(perte)</Statistic.Label>
+                                    <Statistic.Label>Gain/(Loss)</Statistic.Label>
                                 </Statistic>
                             </Statistic.Group>
                         </div>    
@@ -142,13 +142,13 @@ export default function Portfolio(props) {
                         <table className="table table-striped">
                             <thead>
                                 <th width="70px"> </th>
-                                <th width="200px">  Produit</th>
-                                <th width="200px" align="right" style={styles}> Montant investi </th>
-                                <th width="200px" align="right" style={styles}> Quantité </th>
-                                <th width="150px" align="right" style={styles}> Prix d'achat </th>
-                                <th width="150px" align="right" style={styles}> Prix actuel</th>
-                                <th width="200px" align="right" style={styles}> Montant actuel </th>
-                                <th width="200px" align="right" style={styles}> Gain / Perte </th>
+                                <th width="200px">  Product</th>
+                                <th width="200px" align="right" style={styles}> Amount invested </th>
+                                <th width="200px" align="right" style={styles}> Quantity </th>
+                                <th width="150px" align="right" style={styles}> Avg price </th>
+                                <th width="150px" align="right" style={styles}> Current price</th>
+                                <th width="200px" align="right" style={styles}> Current value </th>
+                                <th width="200px" align="right" style={styles}> Gain / Loss </th>
                             </thead>
                             {
                                 portfolio.map(pfolio => {

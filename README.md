@@ -1,7 +1,7 @@
 # ꓘoinFolio
 ꓘoinFolio is a web application to help user build a portfolio of crypto currency. 
 
-Coded with :heart: by [Raphael Albern](https://github.com/Rapha321)
+Coded with :heart: by [R. J.](https://github.com/Rapha321)
 
 ## Stack
 ꓘoinFolio is built with HTML, CSS, Javascript, React (Hooks: useRef, useState, useEffect, useContext), semanticUI, MaterialUI, Bootstrap react, Toastify. All the data is fetched from CoinGecko API using fetch and axios.

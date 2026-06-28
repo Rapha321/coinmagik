@@ -27,7 +27,7 @@ export default function ChartIndividual(props) {
   
   // Remplir l'array avec les prix historiques pour chaque coin
   for (let data of priceData) {
-    data1.push({nameX: "      Prix: 7 jours historique", prix: data})
+    data1.push({nameX: "      Price: 7 days history", prix: data})
   }
 
   return (

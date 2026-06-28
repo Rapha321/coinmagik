@@ -2,6 +2,5 @@
   "env": {
     "NODE_ENV": "production"
   },
-  "buildCommand": "npm run build",
-  "nodeVersion": "24"
+  "buildCommand": "npm run build"
 }

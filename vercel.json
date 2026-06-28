@@ -1,6 +1,5 @@
 {
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "buildCommand": "npm run build"
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "framework": null
 }

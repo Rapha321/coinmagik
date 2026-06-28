@@ -1,5 +1,5 @@
 {
-  "buildCommand": null,
-  "outputDirectory": ".",
-  "framework": null
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "framework": "react"
 }

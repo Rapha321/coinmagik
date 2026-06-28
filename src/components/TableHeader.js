@@ -16,7 +16,7 @@ export default function TableHeader(props) {
             <th width="200px" align="right" style={styles}> Price</th>
             <th width="200px" align="right" style={styles}> Change in price</th>
             <th width="200px" align="right" style={styles}> Volume</th>
-            <th width="150px"> My Portfolio </th>
+            <th width="150px"> Buy / Sell </th>
         </Container>
     )
 }

@@ -86,11 +86,11 @@ export default function TopTenResult(props) {
                                                 <td><strong>{addCommas(coin.circulating_supply.toFixed(0))}</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>Day high: </td>
+                                                <td>High of the day: </td>
                                                 <td><strong>{addCommas(coin.high_24h.toFixed(4))}</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>Day low: </td>
+                                                <td>Low of the day: </td>
                                                 <td><strong>{addCommas(coin.low_24h.toFixed(4))}</strong></td>
                                             </tr>
                                         </table>

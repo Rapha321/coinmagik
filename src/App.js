@@ -1,6 +1,6 @@
 import React from "react"
 import './App.css'
-import 'semantic-ui-css/semantic.min.css'
+// import 'semantic-ui-css/semantic.min.css'
 import Home from "./components/Home"
 import Header from './components/Header'
 import { PortfolioProvider } from "./components/PortfolioContext"

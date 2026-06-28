@@ -87,9 +87,9 @@ export default function TableBody(props) {
                 onMouseLeave={() => setHover(false)}>
                 <td width="70px" style={{display: afficher()}} onClick={handleClick} > <img alt="logo" src={props.img} width="25px"/> </td>
                 <td width="200px" style={{display: afficher()}} onClick={handleClick} > {props.id} </td>
-                <td width="200px" align="right" style={styles} onClick={handleClick} > {addCommas(props.prix.toFixed(4))} </td>
-                <td width="200px" align="right" style={styles} onClick={handleClick} > {props.prixChange.toFixed(5)} </td>
-                <td width="200px" align="right" style={styles} onClick={handleClick} > {addCommas(props.volTotal)} </td>
+                <td width="200px" align="right" style={styles} onClick={handleClick} > {props.prix ? addCommas(props.prix.toFixed(4)) : 'N/A'} </td>
+                <td width="200px" align="right" style={styles} onClick={handleClick} > {props.prixChange ? props.prixChange.toFixed(5) : 'N/A'} </td>
+                <td width="200px" align="right" style={styles} onClick={handleClick} > {props.volTotal ? addCommas(props.volTotal) : 'N/A'} </td>
                 <td width="150px" style={{display: afficher()}}> 
                     <Button className={buttonStatus === "Buy" ? "ui mini teal button" : "ui mini orange button"}
                         style={{width:"90px", maxWidth: "90px"}} 
@@ -118,10 +118,10 @@ export default function TableBody(props) {
                                                                     coin: props.symbol, 
                                                                     prixAchat: props.prix
                                                                 } 
-                                                            ])
+                                                                ])
                                 setDisplay("none")
                                 
-                                toast.success('👍 Ajouter avec succes!', {
+                                toast.success('👍 Buy successful!', {
                                     toastId: 'info2',
                                     position: "top-right",
                                     autoClose: 2000,
@@ -162,11 +162,11 @@ export default function TableBody(props) {
                             </tr>
                             <tr>
                                 <td>Total supply:</td>
-                                <td><strong>{addCommas(props.totalSupply)}</strong></td>
+                                <td><strong>{props.totalSupply ? addCommas(props.totalSupply) : 'N/A'}</strong></td>
                             </tr>
                             <tr>
                                 <td>Max supply: </td>
-                                <td><strong>{addCommas(props.maxSupply)}</strong></td>
+                                <td><strong>{props.maxSupply ? addCommas(props.maxSupply) : 'N/A'}</strong></td>
                             </tr>
                         </table>
                     </div>
